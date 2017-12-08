@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="jar/aopalliance-1.0.jar"/>
+	<classpathentry kind="lib" path="jar/apache-logging-log4j.jar"/>
+	<classpathentry kind="lib" path="jar/aspectjweaver-1.7.2.jar"/>
+	<classpathentry kind="lib" path="jar/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="jar/jcl-over-slf4j-1.7.25.jar"/>
+	<classpathentry kind="lib" path="jar/junit-4.10.jar"/>
+	<classpathentry kind="lib" path="jar/logback-classic-1.0.7.jar"/>
+	<classpathentry kind="lib" path="jar/logback-core-1.0.7.jar"/>
+	<classpathentry kind="lib" path="jar/slf4j-api-1.6.6.jar"/>
+	<classpathentry kind="lib" path="jar/slf4j-ext-1.6.6.jar"/>
+	<classpathentry kind="lib" path="jar/spring-aop-3.2.4.RELEASE.jar" sourcepath="jar/spring-aop-3.2.4.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="jar/spring-beans-3.2.4.RELEASE.jar" sourcepath="jar/spring-beans-3.2.4.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="jar/spring-context-3.2.4.RELEASE.jar" sourcepath="jar/spring-context-3.2.4.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="jar/spring-core-3.2.4.RELEASE.jar" sourcepath="jar/spring-core-3.2.4.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="jar/spring-expression-3.2.4.RELEASE.jar" sourcepath="jar/spring-expression-3.2.4.RELEASE-sources.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
