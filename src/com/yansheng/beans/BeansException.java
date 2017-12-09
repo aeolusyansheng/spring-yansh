@@ -10,4 +10,5 @@ public abstract class BeansException extends NestedRuntimeException {
     
     //todo
     //test
+    //test2
 }
