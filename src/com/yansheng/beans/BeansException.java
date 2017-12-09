@@ -7,8 +7,8 @@ public abstract class BeansException extends NestedRuntimeException {
     public BeansException(String msg) {
         super(msg);
     }
+        
+    //
     
-    //todo
-    //test
-    //test2
+    
 }
