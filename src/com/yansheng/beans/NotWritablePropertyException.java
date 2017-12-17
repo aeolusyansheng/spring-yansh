@@ -1,5 +1,6 @@
 package com.yansheng.beans;
 
+@SuppressWarnings("serial")
 public class NotWritablePropertyException extends InvalidPropertyException {
 
 	private String[] possibleMatches = null;

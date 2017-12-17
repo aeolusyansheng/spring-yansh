@@ -4,6 +4,7 @@ import org.springframework.util.StringUtils;
 
 import com.yansheng.beans.BeansException;
 
+@SuppressWarnings("serial")
 public class NoSuchBeanDefinitionException extends BeansException {
 
 	private String beanName;
