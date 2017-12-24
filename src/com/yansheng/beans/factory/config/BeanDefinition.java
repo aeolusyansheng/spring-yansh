@@ -55,7 +55,7 @@ public interface BeanDefinition extends AttributeAccessor, BeanMetadataElement {
 
 	boolean isSingleton();
 
-	boolean isPropotype();
+	boolean isPrototype();
 
 	boolean isAbstract();
 
