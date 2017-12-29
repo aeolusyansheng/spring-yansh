@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.util.ObjectUtils;
 
 import helloworld.MyBean;
 import helloworld.MyBeanFactoryPostProcessor;
@@ -59,6 +60,13 @@ public class TestHelloworld {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("Root-Context.xml");
         MyBean mybean = context.getBean("myBean", MyBean.class);
         mybean.toString2(mybean.getSex());
+    }
+    
+    @Test
+    public void testHex() {
+    		String aa  ="qqq";
+    		String hex = ObjectUtils.getIdentityHexString(aa);
+    		System.out.println(hex);
     }
 
 }
