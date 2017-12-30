@@ -27,7 +27,7 @@ public class CompositeComponentDefinition extends AbstractComponentDefinition {
 		return this.source;
 	}
 
-	public void addComponentDefinition(ComponentDefinition component) {
+	public void addNestedComponents(ComponentDefinition component) {
 		Assert.notNull(component, "ComponentDefinition不能为null");
 		this.nestedComponents.add(component);
 	}
