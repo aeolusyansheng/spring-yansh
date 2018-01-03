@@ -92,17 +92,17 @@ public abstract class AbstractBeanDefinitonReader implements BeanDefinitionReade
 	}
 
 	@Override
-	public int loadBeanDefinition(Resource... resources) throws BeanDefinitionStoreException {
+	public int loadBeanDefinitions(Resource... resources) throws BeanDefinitionStoreException {
 		Assert.notNull(resources, "Resource array 不能为null。");
 		int count = 0;
 		for (Resource resource : resources) {
-			count += loadBeanDefinition(resource);
+			count += loadBeanDefinitions(resource);
 		}
 		return count;
 	}
 
 	@Override
-	public int loadBeanDefinition(String location) throws BeanDefinitionStoreException {
+	public int loadBeanDefinitions(String location) throws BeanDefinitionStoreException {
 		return loadBeanDefinition(location, null);
 	}
 
@@ -115,7 +115,7 @@ public abstract class AbstractBeanDefinitonReader implements BeanDefinitionReade
 			// 可加载多个资源
 			try {
 				Resource[] resources = ((ResourcePatternResolver) resourceLoader).getResources(location);
-				int loadCount = loadBeanDefinition(resources);
+				int loadCount = loadBeanDefinitions(resources);
 				if (actualResources != null) {
 					for (Resource resource : resources) {
 						actualResources.add(resource);
@@ -131,7 +131,7 @@ public abstract class AbstractBeanDefinitonReader implements BeanDefinitionReade
 		} else {
 			// 一次加载一个资源
 			Resource resource = resourceLoader.getResource(location);
-			int loadCount = loadBeanDefinition(resource);
+			int loadCount = loadBeanDefinitions(resource);
 			if (actualResources != null) {
 				actualResources.add(resource);
 			}
@@ -143,11 +143,11 @@ public abstract class AbstractBeanDefinitonReader implements BeanDefinitionReade
 	}
 
 	@Override
-	public int loadBeanDefinition(String... locations) throws BeanDefinitionStoreException {
+	public int loadBeanDefinitions(String... locations) throws BeanDefinitionStoreException {
 		Assert.notNull(locations, "Location array 不能为null。");
 		int count = 0;
 		for (String location : locations) {
-			count += loadBeanDefinition(location);
+			count += loadBeanDefinitions(location);
 		}
 		return count;
 	}

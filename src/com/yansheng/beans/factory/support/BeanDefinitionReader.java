@@ -15,11 +15,11 @@ public interface BeanDefinitionReader {
 
 	BeanNameGenerator getBeanNameGenerator();
 
-	int loadBeanDefinition(Resource resource) throws BeanDefinitionStoreException;
+	int loadBeanDefinitions(Resource resource) throws BeanDefinitionStoreException;
 
-	int loadBeanDefinition(Resource... resources) throws BeanDefinitionStoreException;
+	int loadBeanDefinitions(Resource... resources) throws BeanDefinitionStoreException;
 
-	int loadBeanDefinition(String location) throws BeanDefinitionStoreException;
+	int loadBeanDefinitions(String location) throws BeanDefinitionStoreException;
 
-	int loadBeanDefinition(String... locations) throws BeanDefinitionStoreException;
+	int loadBeanDefinitions(String... locations) throws BeanDefinitionStoreException;
 }
