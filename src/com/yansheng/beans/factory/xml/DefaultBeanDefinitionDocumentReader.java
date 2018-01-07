@@ -95,7 +95,6 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 		} else {
 			delegate.parseCustomElement(root);
 		}
-
 	}
 
 	private void parseDefaultElement(Element ele, BeanDefinitionParserDelegate delegate) {

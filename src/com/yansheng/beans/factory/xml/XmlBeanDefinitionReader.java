@@ -61,7 +61,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitonReader {
 	private final ThreadLocal<Set<EncodedResource>> resourcesCurrentlyBeingLoaded = new NamedThreadLocal<Set<EncodedResource>>(
 			"XML bean definition resources currently being loaded");
 
-	protected XmlBeanDefinitionReader(BeanDefinitionRegistry registry) {
+	public XmlBeanDefinitionReader(BeanDefinitionRegistry registry) {
 		super(registry);
 	}
 
