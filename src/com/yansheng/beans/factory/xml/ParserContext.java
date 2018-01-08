@@ -48,6 +48,10 @@ public final class ParserContext {
 		return (this.containingBeanDefinition != null);
 	}
 
+	public boolean isDefaultLazyInit() {
+		return BeanDefinitionParserDelegate.TRUE_VALUE.equals(this.delegate.getDefaults().getLazyInit());
+	}
+
 	public Object extractSource(Object sourceCandidate) {
 		return this.readerContext.extractSource(sourceCandidate);
 	}
