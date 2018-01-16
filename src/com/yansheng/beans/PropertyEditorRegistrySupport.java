@@ -11,6 +11,10 @@ import java.nio.charset.Charset;
 import java.util.Collection;
 import java.util.Currency;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -60,7 +64,7 @@ public class PropertyEditorRegistrySupport implements PropertyEditorRegistry {
     private Map<Class<?>, PropertyEditor> customEditors;
     private Map<String, CustomEditorHolder> customEditorsForPath;
     private Set<PropertyEditor> sharedEditors;
-    private Map<Class<?>, PropertyEditor> customEditorForCathe;
+    private Map<Class<?>, PropertyEditor> customEditorCathe;
 
     public void setConversionService(ConversionService conversionService) {
         this.conversionService = conversionService;
@@ -83,6 +87,22 @@ public class PropertyEditorRegistrySupport implements PropertyEditorRegistry {
             this.overriddenDefaultEditors = new HashMap<Class<?>, PropertyEditor>();
         }
         this.overriddenDefaultEditors.put(requiredType, propertyEditor);
+    }
+
+    public PropertyEditor getDefaultEditor(Class<?> requiredType) {
+        if (!this.defaultEditorsActive) {
+            return null;
+        }
+        if (this.overriddenDefaultEditors != null) {
+            PropertyEditor editor = this.overriddenDefaultEditors.get(requiredType);
+            if (editor != null) {
+                return editor;
+            }
+        }
+        if (this.defaultEditors == null) {
+            createDefaultEditors();
+        }
+        return this.defaultEditors.get(requiredType);
     }
 
     private void createDefaultEditors() {
@@ -148,22 +168,126 @@ public class PropertyEditorRegistrySupport implements PropertyEditorRegistry {
         }
     }
 
+    protected void copyDefaultEditorsTo(PropertyEditorRegistrySupport target) {
+        target.defaultEditorsActive = this.defaultEditorsActive;
+        target.defaultEditors = this.defaultEditors;
+        target.configValueEditorsActive = this.configValueEditorsActive;
+        target.overriddenDefaultEditors = this.overriddenDefaultEditors;
+    }
+
     @Override
     public void registerCustomEditor(Class<?> requiredType, PropertyEditor propertyEditor) {
-        // TODO Auto-generated method stub
-
+        registerCustomEditor(requiredType, null, propertyEditor);
     }
 
     @Override
     public void registerCustomEditor(Class<?> requiredType, String propertyPath, PropertyEditor propertyEditor) {
-        // TODO Auto-generated method stub
+        if (requiredType == null && propertyPath == null) {
+            throw new IllegalArgumentException("requiredType或者propertyPath不能为null。");
+        }
+        if (requiredType != null) {
+            if (this.customEditors == null) {
+                this.customEditors = new LinkedHashMap<Class<?>, PropertyEditor>(16);
+            }
+            this.customEditors.put(requiredType, propertyEditor);
+            this.customEditorCathe = null;
+        } else {
+            if (this.customEditorsForPath != null) {
+                this.customEditorsForPath = new LinkedHashMap<String, CustomEditorHolder>(16);
+            }
+            this.customEditorsForPath.put(propertyPath, new CustomEditorHolder(propertyEditor, requiredType));
+        }
+    }
 
+    public void registerSharedEditor(Class<?> requiredType, PropertyEditor propertyEditor) {
+        registerCustomEditor(requiredType, null, propertyEditor);
+        if (this.sharedEditors == null) {
+            this.sharedEditors = new HashSet<PropertyEditor>();
+        }
+        this.sharedEditors.add(propertyEditor);
+    }
+
+    public boolean isSharedEditor(PropertyEditor propertyEditor) {
+        return (this.sharedEditors != null && this.sharedEditors.contains(propertyEditor));
     }
 
     @Override
     public PropertyEditor findCustomEditor(Class<?> requiredType, String propertyPath) {
-        // TODO Auto-generated method stub
+        Class<?> requiredTypeToUse = requiredType;
+        if (propertyPath != null) {
+            if (this.customEditorsForPath != null) {
+                PropertyEditor editor = getCustomEditor(propertyPath, requiredType);
+                if (editor == null) {
+                    List<String> strippedPaths = new LinkedList<String>();
+                    addStrippedPropertyPaths(strippedPaths, "", propertyPath);
+                    for (Iterator<String> it = strippedPaths.iterator(); it.hasNext() && editor == null;) {
+                        String strippedPath = it.next();
+                        editor = getCustomEditor(strippedPath, requiredType);
+                    }
+                }
+                if (editor != null) {
+                    return editor;
+                }
+            }
+            if (requiredType == null) {
+                requiredTypeToUse = getPropertyType(propertyPath);
+            }
+        }
+        return getCustomEditor(requiredTypeToUse);
+    }
+
+
+
+    protected Class<?> getPropertyType(String propertyPath) {
         return null;
+    }
+
+    private PropertyEditor getCustomEditor(String propertyName, Class<?> requiredType) {
+        CustomEditorHolder holder = this.customEditorsForPath.get(propertyName);
+        return (holder != null ? holder.getPropertyEditor(requiredType) : null);
+    }
+
+    private PropertyEditor getCustomEditor(Class<?> requiredType) {
+        if (requiredType == null || this.customEditors == null) {
+            return null;
+        }
+        PropertyEditor editor = this.customEditors.get(requiredType);
+        if (editor == null) {
+            //find cathe
+            if (this.customEditorCathe != null) {
+                editor = this.customEditorCathe.get(requiredType);
+            }
+            if (editor == null) {
+                //find super class or interface
+                for (Iterator<Class<?>> it = this.customEditors.keySet().iterator(); it.hasNext() && editor == null;) {
+                    Class<?> key = it.next();
+                    if (key.isAssignableFrom(requiredType)) {
+                        editor = this.customEditors.get(key);
+                        //add into cathe
+                        if (this.customEditorCathe == null) {
+                            this.customEditorCathe = new HashMap<Class<?>, PropertyEditor>();
+                        }
+                        this.customEditorCathe.put(requiredType, editor);
+                    }
+                }
+            }
+        }
+        return editor;
+    }
+
+    private void addStrippedPropertyPaths(List<String> strippedPaths, String nestedPath, String propertyPath) {
+        int startIndex = propertyPath.indexOf(PropertyAccessor.PROPERTY_KEY_PREFIX);
+        if (startIndex != -1) {
+            int endIndex = propertyPath.indexOf(PropertyAccessor.PROPERTY_KEY_SUFFIX);
+            if (endIndex != -1) {
+                String prefix = propertyPath.substring(0, startIndex);
+                String key = propertyPath.substring(startIndex, endIndex + 1);
+                String suffix = propertyPath.substring(endIndex + 1, propertyPath.length());
+                strippedPaths.add(nestedPath + prefix + suffix);
+                addStrippedPropertyPaths(strippedPaths, nestedPath + prefix, suffix);
+                addStrippedPropertyPaths(strippedPaths, nestedPath + prefix + key, suffix);
+            }
+        }
     }
 
     private static class CustomEditorHolder {
