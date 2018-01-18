@@ -12,8 +12,8 @@ public interface PropertyAccessor {
 	String PROPERTY_KEY_PREFIX = "[";
 	char PROPERTY_KEY_PREFIX_CHAR = '[';
 
-	String PROPERTY_KEY_SUFFIX = "[";
-	char PROPERTY_KEY_SUFFIX_CHAR = '[';
+	String PROPERTY_KEY_SUFFIX = "]";
+	char PROPERTY_KEY_SUFFIX_CHAR = ']';
 
 	boolean isReadableProperty(String propertyName);
 
