@@ -1,3 +1,5 @@
 TypeConverterDelegate
+	convertIfNecessary
+		attemptToConvertStringToEnum
 BeanWrapper
 BeanWrapperImpl
