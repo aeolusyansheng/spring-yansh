@@ -21,10 +21,6 @@ import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.InvalidPropertyException;
-import org.springframework.beans.MethodInvocationException;
-import org.springframework.beans.NotWritablePropertyException;
-import org.springframework.beans.TypeMismatchException;
 import org.springframework.core.CollectionFactory;
 import org.springframework.core.GenericCollectionTypeResolver;
 import org.springframework.core.convert.ConversionException;
@@ -32,6 +28,7 @@ import org.springframework.core.convert.ConverterNotFoundException;
 import org.springframework.core.convert.Property;
 import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.util.Assert;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 public class BeanWrapperImpl extends AbstractPropertyAccessor implements BeanWrapper {
@@ -649,11 +646,110 @@ public class BeanWrapperImpl extends AbstractPropertyAccessor implements BeanWra
 		}
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void setPropertyValue(PropertyTokenHolder tokens, PropertyValue pv) throws BeansException {
 		String propertyName = tokens.canonicalName;
 		String actualName = tokens.actualName;
 
 		if (tokens.keys != null) {
+			PropertyTokenHolder getterTokens = new PropertyTokenHolder();
+			getterTokens.canonicalName = tokens.canonicalName;
+			getterTokens.actualName = tokens.actualName;
+			getterTokens.keys = new String[tokens.keys.length - 1];
+			System.arraycopy(tokens.keys, 0, getterTokens.keys, 0, tokens.keys.length - 1);
+			Object propValue;
+			try {
+				propValue = getPropertyValue(getterTokens);
+			} catch (NotReadablePropertyException ex) {
+				throw new NotWritablePropertyException(getRootClass(), this.nestedPath + propertyName,
+						"Cannot access indexed value in property referenced " + "in indexed property path '"
+								+ propertyName + "'",
+						ex);
+			}
+			String key = tokens.keys[tokens.keys.length - 1];
+			if (propValue == null) {
+				if (this.autoGrowNestedPaths) {
+					int lastKeyIndex = tokens.canonicalName.lastIndexOf('[');
+					getterTokens.canonicalName = tokens.canonicalName.substring(0, lastKeyIndex);
+					propValue = setDefaultValue(getterTokens);
+				} else {
+					throw new NullValueInNestedPathException(getRootClass(), this.nestedPath + propertyName,
+							"Cannot access indexed value in property referenced " + "in indexed property path '"
+									+ propertyName + "': returned null");
+				}
+			}
+			if (propValue.getClass().isArray()) {
+				PropertyDescriptor pd = getCachedIntrospectionResults().getPropertyDescriptor(actualName);
+				Class<?> requiredType = propValue.getClass().getComponentType();
+				int arrayIndex = Integer.parseInt(key);
+				Object oldValue = null;
+				try {
+					if (isExtractOldValueForEditor() && arrayIndex < Array.getLength(propValue)) {
+						oldValue = Array.get(propValue, arrayIndex);
+					}
+					Object convertValue = convertIfNecessay(propertyName, oldValue, pv.getValue(), requiredType,
+							TypeDescriptor.nested(property(pd), tokens.keys.length));
+					Array.set(propValue, arrayIndex, convertValue);
+				} catch (IndexOutOfBoundsException ex) {
+					throw new InvalidPropertyException(getRootClass(), this.nestedPath + propertyName,
+							"Invalid array index in property path '" + propertyName + "'", ex);
+				}
+			} else if (propValue instanceof List) {
+				PropertyDescriptor pd = getCachedIntrospectionResults().getPropertyDescriptor(actualName);
+				Class<?> requiredType = GenericCollectionTypeResolver.getCollectionReturnType(pd.getReadMethod(),
+						tokens.keys.length);
+				List list = (List) propValue;
+				int index = Integer.parseInt(key);
+				Object oldValue = null;
+				if (isExtractOldValueForEditor() && index < list.size()) {
+					oldValue = list.get(index);
+				}
+				Object convertedValue = convertIfNecessay(propertyName, oldValue, pv.getValue(), requiredType,
+						TypeDescriptor.nested(property(pd), tokens.keys.length));
+				int size = list.size();
+				if (index >= size && index < this.autoGrowCollectionLimit) {
+					for (int i = size; i < index; i++) {
+						try {
+							list.add(null);
+						} catch (NullPointerException ex) {
+							throw new InvalidPropertyException(getRootClass(), this.nestedPath + propertyName,
+									"Cannot set element with index " + index + " in List of size " + size
+											+ ", accessed using property path '" + propertyName
+											+ "': List does not support filling up gaps with null elements");
+						}
+					}
+					list.add(convertedValue);
+				} else {
+					try {
+						list.set(index, convertedValue);
+					} catch (IndexOutOfBoundsException ex) {
+						throw new InvalidPropertyException(getRootClass(), this.nestedPath + propertyName,
+								"Invalid list index in property path '" + propertyName + "'", ex);
+					}
+				}
+			} else if (propValue instanceof Map) {
+				PropertyDescriptor pd = getCachedIntrospectionResults().getPropertyDescriptor(actualName);
+				Class<?> mapKeyType = GenericCollectionTypeResolver.getMapKeyReturnType(pd.getReadMethod(),
+						tokens.keys.length);
+				Class<?> mapValueType = GenericCollectionTypeResolver.getMapValueReturnType(pd.getReadMethod(),
+						tokens.keys.length);
+				Map map = (Map) propValue;
+				TypeDescriptor typeDescriptor = (mapKeyType != null ? TypeDescriptor.valueOf(mapKeyType)
+						: TypeDescriptor.valueOf(Object.class));
+				Object convertedMapKey = convertIfNecessay(null, null, key, mapKeyType, typeDescriptor);
+				Object oldValue = null;
+				if (isExtractOldValueForEditor()) {
+					oldValue = map.get(convertedMapKey);
+				}
+				Object convertedMapValue = convertIfNecessay(propertyName, oldValue, pv.getValue(), mapValueType,
+						TypeDescriptor.nested(property(pd), tokens.keys.length));
+				map.put(convertedMapKey, convertedMapValue);
+			} else {
+				throw new InvalidPropertyException(getRootClass(), this.nestedPath + propertyName,
+						"Property referenced in indexed property path '" + propertyName
+								+ "' is neither an array nor a List nor a Map; returned value was [" + pv.getValue()
+								+ "]");
+			}
 
 		} else {
 			PropertyDescriptor pd = pv.resolvedDescriptor;
@@ -675,7 +771,85 @@ public class BeanWrapperImpl extends AbstractPropertyAccessor implements BeanWra
 
 			Object oldValue = null;
 			try {
-
+				Object originalValue = pv.getValue();
+				Object valueToApply = originalValue;
+				if (!Boolean.FALSE.equals(pv.conversionNecessary)) {
+					if (pv.isConverted()) {
+						valueToApply = pv.getConvertedValue();
+					} else {
+						if (isExtractOldValueForEditor() && pd.getReadMethod() != null) {
+							final Method readMethod = pd.getReadMethod();
+							if (!Modifier.isPublic(readMethod.getDeclaringClass().getModifiers())
+									&& !readMethod.isAccessible()) {
+								if (System.getSecurityManager() != null) {
+									AccessController.doPrivileged(new PrivilegedAction<Object>() {
+										@Override
+										public Object run() {
+											readMethod.setAccessible(true);
+											return null;
+										}
+									});
+								} else {
+									readMethod.setAccessible(true);
+								}
+							}
+							try {
+								if (System.getSecurityManager() != null) {
+									oldValue = AccessController.doPrivileged(new PrivilegedExceptionAction<Object>() {
+										@Override
+										public Object run() throws Exception {
+											return readMethod.invoke(object);
+										}
+									}, acc);
+								} else {
+									oldValue = readMethod.invoke(object);
+								}
+							} catch (Exception e) {
+								if (e instanceof PrivilegedActionException) {
+									e = ((PrivilegedActionException) e).getException();
+								}
+								if (logger.isDebugEnabled()) {
+									logger.debug("Could not read previous value of property '" + this.nestedPath
+											+ propertyName + "'", e);
+								}
+							}
+						}
+						valueToApply = convertForProperty(propertyName, oldValue, originalValue, pd);
+					}
+					pv.getOriginalPropertyValue().conversionNecessary = (valueToApply != originalValue);
+				}
+				final Method writeMethod = (pd instanceof GenericTypeAwarePropertyDescriptor
+						? ((GenericTypeAwarePropertyDescriptor) pd).getWriteMethodForActualAccess()
+						: pd.getWriteMethod());
+				if (!Modifier.isPublic(writeMethod.getDeclaringClass().getModifiers()) && !writeMethod.isAccessible()) {
+					if (System.getSecurityManager() != null) {
+						AccessController.doPrivileged(new PrivilegedAction<Object>() {
+							@Override
+							public Object run() {
+								writeMethod.setAccessible(true);
+								return null;
+							}
+						});
+					} else {
+						writeMethod.setAccessible(true);
+					}
+				}
+				final Object value = valueToApply;
+				if (System.getSecurityManager() != null) {
+					try {
+						AccessController.doPrivileged(new PrivilegedExceptionAction<Object>() {
+							@Override
+							public Object run() throws Exception {
+								writeMethod.invoke(object, value);
+								return null;
+							}
+						}, acc);
+					} catch (PrivilegedActionException ex) {
+						throw ex.getException();
+					}
+				} else {
+					writeMethod.invoke(object, value);
+				}
 			} catch (TypeMismatchException ex) {
 				throw ex;
 			} catch (InvocationTargetException ex) {
@@ -692,6 +866,17 @@ public class BeanWrapperImpl extends AbstractPropertyAccessor implements BeanWra
 				throw new MethodInvocationException(pce, ex);
 			}
 		}
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder(getClass().getName());
+		if (this.object != null) {
+			sb.append(": wrapping object [").append(ObjectUtils.identityToString(this.object)).append("]");
+		} else {
+			sb.append(": no wrapped object set");
+		}
+		return sb.toString();
 	}
 
 	// ---------------------------------------------------------------------
