@@ -1,6 +1,7 @@
 package com.yansheng.beans.factory.support;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -9,13 +10,14 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.BeanCreationNotAllowedException;
-import org.springframework.beans.factory.BeanCurrentlyInCreationException;
 import org.springframework.core.SimpleAliasRegistry;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import com.yansheng.beans.factory.BeanCreationException;
+import com.yansheng.beans.factory.BeanCreationNotAllowedException;
+import com.yansheng.beans.factory.BeanCurrentlyInCreationException;
+import com.yansheng.beans.factory.DisposableBean;
 import com.yansheng.beans.factory.ObjectFactory;
 import com.yansheng.beans.factory.config.SingletonBeanRegistry;
 
@@ -24,6 +26,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
     protected static final Object NULL_OBJECT = new Object();
     protected final Log logger = LogFactory.getLog(getClass());
     private final Map<String, Object> singletonObjects = new ConcurrentHashMap<String, Object>(64);
+    @SuppressWarnings("rawtypes")
     private final Map<String, ObjectFactory> singletonFactories = new HashMap<String, ObjectFactory>(16);
     private final Map<String, Object> earlySingletonObject = new HashMap<String, Object>(16);
     private final Set<String> registeredSingletons = new LinkedHashSet<String>(64);
@@ -58,6 +61,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
         }
     }
 
+    @SuppressWarnings("rawtypes")
     protected void addSingletonFactory(String beanName, ObjectFactory singletonFactory) {
         Assert.notNull(singletonFactory, "Singleton factory must not be null");
         synchronized (this.singletonObjects) {
@@ -203,6 +207,146 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
                 !this.singletonsCurrentlyInCreation.remove(beanName)) {
             throw new IllegalStateException("Singleton '" + beanName + "' isn't currently in creation");
         }
+    }
+
+    public void registerDisposableBean(String beanName, DisposableBean bean) {
+        synchronized (this.disposableBeans) {
+            this.disposableBeans.put(beanName, bean);
+        }
+    }
+
+    public void registerContainedBean(String containedBeanName, String containingBeanName) {
+        synchronized (this.containedBeanMap) {
+            Set<String> containedBeans = this.containedBeanMap.get(containingBeanName);
+            if (containedBeans == null) {
+                containedBeans = new LinkedHashSet<String>(8);
+                this.containedBeanMap.put(containingBeanName, containedBeans);
+            }
+            containedBeans.add(containedBeanName);
+        }
+        registerDependentBean(containedBeanName, containingBeanName);
+    }
+
+    public void registerDependentBean(String beanName, String dependentBeanName) {
+        String canonicalName = canonicalName(beanName);
+        synchronized (this.dependentBeanMap) {
+            Set<String> dependentBeans = this.dependentBeanMap.get(canonicalName);
+            if (dependentBeans == null) {
+                dependentBeans = new LinkedHashSet<String>(8);
+                this.dependentBeanMap.put(canonicalName, dependentBeans);
+            }
+            dependentBeans.add(dependentBeanName);
+        }
+        synchronized (this.dependenciesBeanMap) {
+            Set<String> dependenciesForBean = this.dependenciesBeanMap.get(dependentBeanName);
+            if (dependenciesForBean == null) {
+                dependenciesForBean = new LinkedHashSet<String>(8);
+                this.dependenciesBeanMap.put(dependentBeanName, dependenciesForBean);
+            }
+            dependenciesForBean.add(canonicalName);
+        }
+    }
+
+    protected boolean hasDependentBean(String beanName) {
+        return this.dependentBeanMap.containsKey(beanName);
+    }
+
+    public String[] getDependentBeans(String beanName) {
+        Set<String> dependentBeans = this.dependentBeanMap.get(beanName);
+        if (dependentBeans == null) {
+            return new String[0];
+        }
+        return StringUtils.toStringArray(dependentBeans);
+    }
+
+    public String[] getDependenciesForBean(String beanName) {
+        Set<String> dependenciesForBean = this.dependenciesBeanMap.get(beanName);
+        if (dependenciesForBean == null) {
+            return new String[0];
+        }
+        return StringUtils.toStringArray(dependenciesForBean);
+    }
+
+    public void destroySingletons() {
+        if (logger.isInfoEnabled()) {
+            logger.info("Destroying singletons in " + this);
+        }
+        synchronized (this.singletonObjects) {
+            this.singletonsIsCurrentlyInDestruction = true;
+        }
+        String[] disposableBeanNames;
+        synchronized (this.disposableBeans) {
+            disposableBeanNames = StringUtils.toStringArray(this.disposableBeans.keySet());
+        }
+        for (int i = disposableBeanNames.length - 1; i >= 0; i--) {
+            // do disposalBean's distroy method
+            destroySingleton(disposableBeanNames[i]);
+        }
+
+        this.containedBeanMap.clear();
+        this.dependenciesBeanMap.clear();
+        this.dependentBeanMap.clear();
+
+        synchronized (this.singletonObjects) {
+            this.singletonObjects.clear();
+            this.singletonFactories.clear();
+            this.earlySingletonObject.clear();
+            this.registeredSingletons.clear();
+        }
+    }
+
+    public void destroySingleton(String beanName) {
+        removeSingleton(beanName);
+        DisposableBean disposableBean;
+        synchronized (this.disposableBeans) {
+            disposableBean = (DisposableBean) this.disposableBeans.remove(beanName);
+        }
+        destroyBean(beanName, disposableBean);
+    }
+
+    protected void destroyBean(String beanName, DisposableBean bean) {
+        Set<String> dependencies = this.dependentBeanMap.remove(beanName);
+        if (dependencies != null) {
+            if (logger.isDebugEnabled()) {
+                logger.debug("Retrieved dependent beans for bean '" + beanName + "': " + dependencies);
+            }
+            for (String dependentBeanName : dependencies) {
+                destroySingleton(dependentBeanName);
+            }
+        }
+
+        if (bean != null) {
+            try {
+                bean.destroy();
+            } catch (Throwable e) {
+                logger.error("Destroy method on bean with name '" + beanName + "' threw an exception", e);
+            }
+        }
+
+        Set<String> containedBeans = this.containedBeanMap.remove(beanName);
+        if (containedBeans != null) {
+            for (String containedBeanName : containedBeans) {
+                destroySingleton(containedBeanName);
+            }
+        }
+
+        synchronized (this.dependentBeanMap) {
+            for (Iterator<Map.Entry<String, Set<String>>> it = this.dependentBeanMap.entrySet().iterator(); it
+                    .hasNext();) {
+                Map.Entry<String, Set<String>> entry = it.next();
+                Set<String> dependenciesToClean = entry.getValue();
+                dependenciesToClean.remove(beanName);
+                if (dependenciesToClean.isEmpty()) {
+                    it.remove();
+                }
+            }
+        }
+
+        this.dependenciesBeanMap.remove(beanName);
+    }
+
+    protected final Object getSingletonMutex() {
+        return this.singletonObjects;
     }
 
 }
