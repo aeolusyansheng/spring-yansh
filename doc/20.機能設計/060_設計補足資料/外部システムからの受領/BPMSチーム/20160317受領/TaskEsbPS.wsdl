@@ -1,0 +1,386 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<wsdl:definitions name="TaskEsbPS" targetNamespace="http://xmlns.ctc-g.co.jp/Esb/TaskEsbPS"
+                  xmlns:tns="http://xmlns.ctc-g.co.jp/Esb/TaskEsbPS"
+                  xmlns:inp1="http://xmlns.ctc-g.co.jp/Esb/TaskEsbDataModel"
+                  xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/">
+  <plnk:partnerLinkType name="TaskEsbBS">
+    <plnk:role name="TaskEsbBSProvider" portType="tns:TaskEsbBS_ptt"/>
+  </plnk:partnerLinkType>
+  <wsdl:types>
+    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://xmlns.ctc-g.co.jp/Esb/TaskEsbPS"
+                targetNamespace="http://xmlns.ctc-g.co.jp/Esb/TaskEsbDataModel" elementFormDefault="qualified">
+      <xsd:complexType name="taskEsbRequestDataModel">
+        <xsd:sequence>
+          <xsd:element name="sysId">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="20"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="processId">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="20"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="sourceSystemInfo">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="primaryKey">
+                  <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                      <xsd:maxLength value="50"/>
+                    </xsd:restriction>
+                  </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="primaryKeyValueforTaskNAVIDisplay" minOccurs="0">
+                  <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                      <xsd:maxLength value="50"/>
+                    </xsd:restriction>
+                  </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="primaryKeyValueforSourceSystemRun" minOccurs="0">
+                  <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                      <xsd:maxLength value="50"/>
+                    </xsd:restriction>
+                  </xsd:simpleType>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="taskProcessingType" minOccurs="0">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="20"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="taskKind" minOccurs="0">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="100"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="taskKindDetail" minOccurs="0">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="50"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="comment" minOccurs="0">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="1000"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="attachedManagementInfo"  minOccurs="0" maxOccurs="unbounded">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="documentId">
+                  <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                      <xsd:maxLength value="50"/>
+                    </xsd:restriction>
+                  </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="attachedLinkName" minOccurs="0">
+                  <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                      <xsd:maxLength value="100"/>
+                    </xsd:restriction>
+                  </xsd:simpleType>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="updateUserId">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="20"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="picUserId" minOccurs="0">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="20"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="picCompany" minOccurs="0">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="4"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="picDept" minOccurs="0">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="10"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="issuanceDate" minOccurs="0">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:dateTime"></xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="followingSourceSystemInfo" minOccurs="0">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="primaryKey" minOccurs="0">
+                  <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                      <xsd:maxLength value="50"/>
+                    </xsd:restriction>
+                  </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="primaryKeyValueforTaskNAVIDisplay" minOccurs="0">
+                  <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                      <xsd:maxLength value="50"/>
+                    </xsd:restriction>
+                  </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="primaryKeyValueforSourceSystemRun" minOccurs="0">
+                  <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                      <xsd:maxLength value="50"/>
+                    </xsd:restriction>
+                  </xsd:simpleType>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="searchWord" minOccurs="0">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="1000"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="urlInfo"  minOccurs="0" maxOccurs="unbounded">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="displayName" minOccurs="0">
+                  <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                      <xsd:maxLength value="100"/>
+                    </xsd:restriction>
+                  </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="url" minOccurs="0">
+                  <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                      <xsd:maxLength value="500"/>
+                    </xsd:restriction>
+                  </xsd:simpleType>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="emergencyFlag" minOccurs="0">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="1"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="bundleFlag" minOccurs="0">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="1"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="taskEsbResponseDataModel">
+        <xsd:sequence>
+          <xsd:element name="issuanceId" minOccurs="0" maxOccurs="unbounded">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="15"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="resultCode">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:long"></xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="errorCode" minOccurs="0">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="10"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="errorMessage" minOccurs="0">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="1000"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="taskEsbRequestMessage">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="taskEsbRequestDataModel" type="inp1:taskEsbRequestDataModel"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="taskEsbRequestMessageList">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="taskEsbRequestDataModel" type="inp1:taskEsbRequestDataModel" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="taskEsbResponseMessage">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="taskEsbResponseDataModel" type="inp1:taskEsbResponseDataModel"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="issuanceRequest">
+    <wsdl:part name="issuanceRequest" element="inp1:taskEsbRequestMessage"/>
+  </wsdl:message>
+  <wsdl:message name="issuanceMultiRequest">
+    <wsdl:part name="issuanceMultiRequest" element="inp1:taskEsbRequestMessageList"/>
+  </wsdl:message>
+  <wsdl:message name="reIssuanceRequest">
+    <wsdl:part name="reIssuanceRequest" element="inp1:taskEsbRequestMessage"/>
+  </wsdl:message>
+  <wsdl:message name="updateRequest">
+    <wsdl:part name="updateRequest" element="inp1:taskEsbRequestMessage"/>
+  </wsdl:message>
+  <wsdl:message name="updateMultiRequest">
+    <wsdl:part name="updateMultiRequest" element="inp1:taskEsbRequestMessageList"/>
+  </wsdl:message>
+  <wsdl:message name="cancelRequest">
+    <wsdl:part name="cancelRequest" element="inp1:taskEsbRequestMessage"/>
+  </wsdl:message>
+  <wsdl:message name="checkAssignRequest">
+    <wsdl:part name="checkAssignRequest" element="inp1:taskEsbRequestMessage"/>
+  </wsdl:message>
+  <wsdl:message name="taskEsbResponseMessage">
+    <wsdl:part name="taskEsbResponseMessage" element="inp1:taskEsbResponseMessage"/>
+  </wsdl:message>
+  <wsdl:portType name="TaskEsbBS_ptt">
+    <wsdl:operation name="issuance">
+      <wsdl:input message="tns:issuanceRequest"/>
+      <wsdl:output message="tns:taskEsbResponseMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="issuanceMulti">
+      <wsdl:input message="tns:issuanceMultiRequest"/>
+      <wsdl:output message="tns:taskEsbResponseMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="reIssuance">
+      <wsdl:input message="tns:reIssuanceRequest"/>
+      <wsdl:output message="tns:taskEsbResponseMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="update">
+      <wsdl:input message="tns:updateRequest"/>
+      <wsdl:output message="tns:taskEsbResponseMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="updateMulti">
+      <wsdl:input message="tns:updateMultiRequest"/>
+      <wsdl:output message="tns:taskEsbResponseMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="cancel">
+      <wsdl:input message="tns:cancelRequest"/>
+      <wsdl:output message="tns:taskEsbResponseMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="checkAssign">
+      <wsdl:input message="tns:checkAssignRequest"/>
+      <wsdl:output message="tns:taskEsbResponseMessage"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TaskEsbBS_ptt-binding" type="tns:TaskEsbBS_ptt">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="issuance">
+      <soap:operation soapAction="issuance"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="issuanceMulti">
+      <soap:operation soapAction="issuanceMulti"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="reIssuance">
+      <soap:operation soapAction="reIssuance"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="update">
+      <soap:operation soapAction="update"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateMulti">
+      <soap:operation soapAction="updateMulti"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cancel">
+      <soap:operation soapAction="cancel"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkAssign">
+      <soap:operation soapAction="checkAssign"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="taskNaviService">
+    <wsdl:port name="taskNaviServiceHttpEndpoint" binding="tns:TaskEsbBS_ptt-binding">
+      <soap:address location="http://10.230.17.139:7003/TaskEsbProject/TaskEsbPS"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

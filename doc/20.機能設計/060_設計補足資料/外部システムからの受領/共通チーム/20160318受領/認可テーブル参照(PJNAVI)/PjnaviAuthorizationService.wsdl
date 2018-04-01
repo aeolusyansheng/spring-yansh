@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://ctc-g.co.jp/xmlns/pom/PjnaviAuthorizationService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="PjnaviAuthorizationService" targetNamespace="http://ctc-g.co.jp/xmlns/pom/PjnaviAuthorizationService">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://ctc-g.co.jp/xmlns/pom/PjnaviAuthorizationService" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://ctc-g.co.jp/xmlns/pom/PjnaviAuthorizationService">
+  <xs:element name="delete" type="tns:delete"/>
+  <xs:element name="deleteResponse" type="tns:deleteResponse"/>
+  <xs:element name="find" type="tns:find"/>
+  <xs:element name="findResponse" type="tns:findResponse"/>
+  <xs:complexType name="delete">
+    <xs:sequence>
+      <xs:element name="uniqueId" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="deleteResponse">
+    <xs:sequence>
+      <xs:element name="deletionCount" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="find">
+    <xs:sequence>
+      <xs:element name="uniqueId" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="findResponse">
+    <xs:sequence>
+      <xs:element name="pjnaviAuthorizationInfo" type="tns:pjnaviAuthorizationInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="pjnaviAuthorizationInfo">
+    <xs:sequence>
+      <xs:element name="creationDate" type="xs:dateTime"/>
+      <xs:element name="accountCode" type="xs:string"/>
+      <xs:element name="companyCode" type="xs:string"/>
+      <xs:element name="divisionCode" type="xs:string"/>
+      <xs:element name="responsibilityCode" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PjnaviAuthorizationInfoNotFound" type="tns:pjnaviAuthorizationInfoNotFound"/>
+  <xs:complexType name="pjnaviAuthorizationInfoNotFound">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="findResponse">
+    <wsdl:part element="tns:findResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="delete">
+    <wsdl:part element="tns:delete" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteResponse">
+    <wsdl:part element="tns:deleteResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="find">
+    <wsdl:part element="tns:find" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="PjnaviAuthorizationInfoNotFound">
+    <wsdl:part element="tns:PjnaviAuthorizationInfoNotFound" name="PjnaviAuthorizationInfoNotFound">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="PjnaviAuthorizationServiceEndpoint">
+    <wsdl:operation name="delete">
+      <wsdl:input message="tns:delete" name="delete">
+    </wsdl:input>
+      <wsdl:output message="tns:deleteResponse" name="deleteResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="find">
+      <wsdl:input message="tns:find" name="find">
+    </wsdl:input>
+      <wsdl:output message="tns:findResponse" name="findResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:PjnaviAuthorizationInfoNotFound" name="PjnaviAuthorizationInfoNotFound">
+    </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PjnaviAuthorizationServiceSoapBinding" type="tns:PjnaviAuthorizationServiceEndpoint">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="delete">
+      <soap:operation soapAction="delete" style="document"/>
+      <wsdl:input name="delete">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="find">
+      <soap:operation soapAction="find" style="document"/>
+      <wsdl:input name="find">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="PjnaviAuthorizationInfoNotFound">
+        <soap:fault name="PjnaviAuthorizationInfoNotFound" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PjnaviAuthorizationService">
+    <wsdl:port binding="tns:PjnaviAuthorizationServiceSoapBinding" name="PjnaviAuthorizationPort">
+      <soap:address location="http://localhost:8080/portal/ws/PjnaviAuthorizationService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

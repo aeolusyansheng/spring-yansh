@@ -1,0 +1,1407 @@
+﻿<html>
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="content-type">
+	<title>Update_Date仕様書</title>
+	<meta http-equiv="content-style-type" content="text/css">
+	<meta http-equiv="content-script-type" content="text/javascript">
+	<link rel="stylesheet" href="../../style_typeA.css" type="text/css">
+</head>
+<body bgcolor="#ffffff">
+<div id="main_wrap">
+<!-- print -->
+<!-- タイトル -->
+<table width="100%" border="1" cellpadding="0" cellspacing="0" id="TOP">
+<tr>
+	<td bgcolor="#047391">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td><font color="#FFFFFF"><img src="../../img/header_b_flow.gif" alt="" width="425" height="58" hspace="4" vspace="5"></font></td>
+			<td><div align="right"><img src="../../img/header_b_logo.gif" alt="" width="216" height="58" hspace="4" vspace="5"></div></td>
+		</tr>
+		</table>
+	</td>
+</tr>
+<tr>
+	<td bordercolor="#969696" bgcolor="#666666" class="head_title"><span class="head_subtitle02">プロジェクト名：<a href="main.html">ATRLNK010</a> ／ フロー名：Update_Date</span></td>
+</tr>
+</table>
+<!-- 概要 -->
+<table width="100%" border="0" cellpadding="2" cellspacing="0">
+<tr>
+	<td width="50"><img src="../../img/icon_flow.gif" alt="" width="26" height="23" hspace="10" vspace="10"></td>
+	<td class="title_base02">Update_Dateの説明</td>
+</tr>
+<tr>
+	<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+<!-- 画面 -->
+<p class="head_subtitle_02_02">● フロー画面</p>
+<p><img src="F8.jpeg" alt="Update_Dateのフロー画面" border="1" class="img-simple-list" usemap="#F8_map"></p>
+<map name="F8_map">
+			<area href="#F8C1" shape="rect" coords="16,16,52,52" alt="Start1"/>
+			<area href="#F8C2" shape="rect" coords="16,84,52,120" alt="Mapper3"/>
+			<area href="#F8C3" shape="rect" coords="16,152,52,188" alt="RDBGet1"/>
+			<area href="#F8C4" shape="rect" coords="16,220,52,256" alt="Mapper1"/>
+			<area href="#F8C5" shape="rect" coords="16,288,52,324" alt="RDBMerge2"/>
+			<area href="#F8C6" shape="rect" coords="16,356,52,392" alt="End1"/>
+	</map>
+<!-- 実行設定 -->
+<!-- 被参照検索 -->
+			<p class="title_flow_index">● このフローを参照しているコンポーネント</p>
+		<table class="table-simple-list">
+			<tr>
+				<th width="35%">プロジェクト名</th>
+				<th width="35%">フロー名</th>
+				<th>コンポーネント名</th>
+			</tr>
+							<tr>
+																<td width="35%"><a href="../../project/Flow_ProxyFlow_EAI_PJ2PPM_ATRLNK010/main.html">ATRLNK010</a></td>
+						<td width="35%"><a href="../../project/Flow_ProxyFlow_EAI_PJ2PPM_ATRLNK010/F2.html">EVM_Info</a></td>
+						<td><a href="../../project/Flow_ProxyFlow_EAI_PJ2PPM_ATRLNK010/F2.html#SubFlow1">SubFlow1</a></td>
+									</tr>
+							<tr>
+																<td width="35%"><a href="../../project/Flow_ProxyFlow_EAI_PJ2PPM_ATRLNK010/main.html">ATRLNK010</a></td>
+						<td width="35%"><a href="../../project/Flow_ProxyFlow_EAI_PJ2PPM_ATRLNK010/F3.html">OTL_Info</a></td>
+						<td><a href="../../project/Flow_ProxyFlow_EAI_PJ2PPM_ATRLNK010/F3.html#SubFlow1">SubFlow1</a></td>
+									</tr>
+							<tr>
+																<td width="35%"><a href="../../project/Flow_ProxyFlow_EAI_PJ2PPM_ATRLNK010/main.html">ATRLNK010</a></td>
+						<td width="35%"><a href="../../project/Flow_ProxyFlow_EAI_PJ2PPM_ATRLNK010/F11.html">WBS_Info_Create_CSV</a></td>
+						<td><a href="../../project/Flow_ProxyFlow_EAI_PJ2PPM_ATRLNK010/F11.html#SubFlow1">SubFlow1</a></td>
+									</tr>
+							<tr>
+																<td width="35%"><a href="../../project/Flow_ProxyFlow_EAI_PJ2PPM_ATRLNK010/main.html">ATRLNK010</a></td>
+						<td width="35%"><a href="../../project/Flow_ProxyFlow_EAI_PJ2PPM_ATRLNK010/F12.html">Cost_info</a></td>
+						<td><a href="../../project/Flow_ProxyFlow_EAI_PJ2PPM_ATRLNK010/F12.html#SubFlow1">SubFlow1</a></td>
+									</tr>
+					</table>
+	<!-- プロパティ -->
+<p class="head_subtitle_02_02">● フロープロパティ</p>
+<table class="table-simple-list">
+<tr>
+	<th width="150">プロパティ名</th>
+	<th>設定値</th>
+</tr>
+<tr>
+  <td bgcolor="#EBEBEB">タイムアウト（秒）</td>
+  <td >
+                                          180
+            </td>
+</tr>
+<tr>
+  <td bgcolor="#EBEBEB">汎用エラー処理</td>
+  <td >
+                                                &nbsp;
+            </td>
+</tr>
+<tr>
+  <td bgcolor="#EBEBEB">実行を許可するユーザー</td>
+  <td >
+                                          &nbsp;
+            </td>
+</tr>
+<tr>
+  <td bgcolor="#EBEBEB">アプリケーションログ設定</td>
+  <td >
+                                          &nbsp;
+            </td>
+</tr>
+<tr>
+  <td bgcolor="#EBEBEB">&nbsp;&nbsp;&nbsp;&nbsp;ログ設定名</td>
+  <td >
+                                          (なし)
+            </td>
+</tr>
+<tr>
+  <td bgcolor="#EBEBEB">&nbsp;&nbsp;&nbsp;&nbsp;ログレベル</td>
+  <td >
+                                          システム設定
+            </td>
+</tr>
+<tr>
+  <td bgcolor="#EBEBEB">&nbsp;&nbsp;&nbsp;&nbsp;システムログに出力</td>
+  <td >
+                                          はい
+            </td>
+</tr>
+<tr>
+  <td bgcolor="#EBEBEB">セッション</td>
+  <td >
+                                          終了時に閉じる
+            </td>
+</tr>
+<tr>
+  <td bgcolor="#EBEBEB">HTTPでの呼出しを許可</td>
+  <td >
+                                          いいえ
+            </td>
+</tr>
+</table>
+<!-- フロー変数 -->
+<p class="head_subtitle_02_02">● フロー変数</p>
+<table class="table-simple-list">
+	<tr>
+		<th>番号</th>
+		<th>変数名</th>
+		<th>型</th>
+		<th>属性</th>
+		<th>初期値</th>
+		<th>説明</th>
+		<th>参照</th>
+	</tr>
+				<tr>
+			<td bgcolor="#EBEBEB">1</td>
+			<td>PGM_ID</td>
+			<td>String</td>
+			<td>
+									公開
+																			/
+										変更不可
+								&nbsp;
+			</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>
+																		<a href="#F8C4">Mapper1</a>
+																</td>
+		</tr>
+					<tr>
+			<td bgcolor="#EBEBEB">2</td>
+			<td>汎用区分コード</td>
+			<td>String</td>
+			<td>
+									公開
+																			/
+										変更不可
+								&nbsp;
+			</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>
+																		<a href="#F8C4">Mapper1</a>
+																				<br>
+										<a href="#F8C2">Mapper3</a>
+																</td>
+		</tr>
+					<tr>
+			<td bgcolor="#EBEBEB">3</td>
+			<td>汎用区分明細コード</td>
+			<td>String</td>
+			<td>
+									公開
+																			/
+										変更不可
+								&nbsp;
+			</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>
+																		<a href="#F8C4">Mapper1</a>
+																				<br>
+										<a href="#F8C2">Mapper3</a>
+																</td>
+		</tr>
+			</table>
+<!-- コンポーネント一覧 -->
+<p class="head_subtitle_02_02">● コンポーネント一覧</p>
+<table class="table-simple-list">
+<tr>
+	<th>番号</th>
+	<th>コンポーネント名</th>
+	<th>種別</th>
+	<th>入力<br/>コンポーネント</th>
+	<th>出力<br/>コンポーネント</th>
+	<th>説明</th>
+	<th>ログ</th>
+</tr>
+	<tr>
+		<td bgcolor="#EBEBEB">1</td>
+		<td><a href="#F8C1">Start1</a></td>
+		<td>Start</td>
+		<td>
+													&nbsp;
+					</td>
+		<td>
+														<a href="#F8C2">Mapper3</a>
+												</td>
+		<td>&nbsp;</td>
+		<td>
+							&nbsp;
+					</td>
+	</tr>
+		<tr>
+		<td bgcolor="#EBEBEB">2</td>
+		<td><a href="#F8C2">Mapper3</a></td>
+		<td>Mapper</td>
+		<td>
+														<a href="#F8C1">Start1</a>
+												</td>
+		<td>
+														<a href="#F8C3">RDBGet1</a>
+												</td>
+		<td>&nbsp;</td>
+		<td>
+							&nbsp;
+					</td>
+	</tr>
+		<tr>
+		<td bgcolor="#EBEBEB">3</td>
+		<td><a href="#F8C3">RDBGet1</a></td>
+		<td>RDBGet</td>
+		<td>
+														<a href="#F8C2">Mapper3</a>
+												</td>
+		<td>
+														<a href="#F8C4">Mapper1</a>
+												</td>
+		<td>&nbsp;</td>
+		<td>
+							&nbsp;
+					</td>
+	</tr>
+		<tr>
+		<td bgcolor="#EBEBEB">4</td>
+		<td><a href="#F8C4">Mapper1</a></td>
+		<td>Mapper</td>
+		<td>
+														<a href="#F8C3">RDBGet1</a>
+												</td>
+		<td>
+														<a href="#F8C5">RDBMerge2</a>
+												</td>
+		<td>&nbsp;</td>
+		<td>
+							&nbsp;
+					</td>
+	</tr>
+		<tr>
+		<td bgcolor="#EBEBEB">5</td>
+		<td><a href="#F8C5">RDBMerge2</a></td>
+		<td>RDBMerge</td>
+		<td>
+														<a href="#F8C4">Mapper1</a>
+												</td>
+		<td>
+														<a href="#F8C6">End1</a>
+												</td>
+		<td>&nbsp;</td>
+		<td>
+							&nbsp;
+					</td>
+	</tr>
+		<tr>
+		<td bgcolor="#EBEBEB">6</td>
+		<td><a href="#F8C6">End1</a></td>
+		<td>End</td>
+		<td>
+														<a href="#F8C5">RDBMerge2</a>
+												</td>
+		<td>
+													&nbsp;
+					</td>
+		<td>&nbsp;</td>
+		<td>
+							&nbsp;
+					</td>
+	</tr>
+	</table>
+<p class="pagetop"><a href="#TOP">↑ページTOPへ</a></p>
+<hr class="dot"/>
+<!-- コンポーネント詳細 -->
+<p class="head_subtitle_02_02">● 各コンポーネントの詳細</p>
+	<table width="100%" border="0" cellpadding="2" cellspacing="0">
+		<tr>
+			<td width="30" bgcolor="179dc1"><img src="../../img/tag_d.gif" alt="" width="18" height="19" hspace="10" vspace="5" id="Start1"></td>
+			<td bgcolor="#179dc1" class="title_base02"><span class="title_base_index02" id="F8C1">1. Start1コンポーネント</span></td>
+		</tr>
+		<tr>
+			<td colspan="2"><img src="../../img/clear.gif" alt="" width="15" height="15"></td>
+		</tr>
+	</table>
+	<table class="table-simple-list">
+		<tr>
+			<td width="10%" rowspan="5" class="v-center"><div align="center"><img src="../../icons/start.png" alt="Start" width="32" height="32"></div></td>
+			<th width="120">名前</th>
+			<td>Start1</td>
+		</tr>
+		<tr>
+			<th width="120">種別</th>
+			<td>Start</td>
+		</tr>
+		<tr>
+			<th width="120">入力コンポーネント</th>
+			<td>
+																	&nbsp;
+							</td>
+		</tr>
+		<tr>
+			<th width="120">出力コンポーネント</th>
+			<td>
+																		<a href="#F8C2">Mapper3</a>
+																</td>
+		</tr>
+		<tr>
+			<th width="120">説明</th>
+			<td>&nbsp;</td>
+		</tr>
+	</table>
+	<!-- コンポーネントプロパティ -->
+	<p class="title_flow_component_subtitle02">■ コンポーネントプロパティ</p>
+	<table class="table-simple-list">
+		<tr>
+			<th width="150">プロパティ名</th>
+			<th>設定値</th>
+		</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">汎用</td>
+  <td >
+                                                &nbsp;
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">トランザクション化</td>
+  <td >
+                                          いいえ
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">チェックポイントを使用</td>
+  <td >
+                                          いいえ
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">実行権限名</td>
+  <td >
+                                          &nbsp;
+            </td>
+</tr>
+			</table>
+	<!-- カテゴリープロパティ -->
+		<!-- ストリーム情報 -->
+			<p class="title_flow_component_subtitle02">■ ストリーム情報(Output)</p>
+		<table class="table-simple-list">
+												<tr>
+			<th class="proTitle" colSpan="2">プロパティ</th>
+			</tr>
+			<tr>
+				<th width="150">プロパティ名</th>
+				<th colSpan="1">設定値</th>
+			</tr>
+							<tr>
+  <td bgcolor="#EBEBEB">ストリーム型</td>
+  <td colspan='1'>
+                                          Any
+            </td>
+</tr>
+								</table>
+		<!-- ログ情報 -->
+		<!-- Mapperの場合 -->
+		<p class="pagetop"><a href="#TOP">↑ページTOPへ</a></p>
+		<table width="100%" border="0" cellpadding="2" cellspacing="0">
+		<tr>
+			<td width="30" bgcolor="179dc1"><img src="../../img/tag_d.gif" alt="" width="18" height="19" hspace="10" vspace="5" id="Mapper3"></td>
+			<td bgcolor="#179dc1" class="title_base02"><span class="title_base_index02" id="F8C2">2. Mapper3コンポーネント</span></td>
+		</tr>
+		<tr>
+			<td colspan="2"><img src="../../img/clear.gif" alt="" width="15" height="15"></td>
+		</tr>
+	</table>
+	<table class="table-simple-list">
+		<tr>
+			<td width="10%" rowspan="5" class="v-center"><div align="center"><img src="../../icons/mapping.png" alt="Mapper" width="32" height="32"></div></td>
+			<th width="120">名前</th>
+			<td>Mapper3</td>
+		</tr>
+		<tr>
+			<th width="120">種別</th>
+			<td>Mapper</td>
+		</tr>
+		<tr>
+			<th width="120">入力コンポーネント</th>
+			<td>
+																		<a href="#F8C1">Start1</a>
+																</td>
+		</tr>
+		<tr>
+			<th width="120">出力コンポーネント</th>
+			<td>
+																		<a href="#F8C3">RDBGet1</a>
+																</td>
+		</tr>
+		<tr>
+			<th width="120">説明</th>
+			<td>&nbsp;</td>
+		</tr>
+	</table>
+	<!-- コンポーネントプロパティ -->
+	<p class="title_flow_component_subtitle02">■ コンポーネントプロパティ</p>
+	<table class="table-simple-list">
+		<tr>
+			<th width="150">プロパティ名</th>
+			<th>設定値</th>
+		</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">汎用</td>
+  <td >
+                                                &nbsp;
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">ループを開始</td>
+  <td >
+                                          いいえ
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">入力をそのまま出力</td>
+  <td >
+                                          いいえ
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">入力が無い場合エラー</td>
+  <td >
+                                          いいえ
+            </td>
+</tr>
+			</table>
+	<!-- カテゴリープロパティ -->
+					<!-- ストリーム情報 -->
+			<p class="title_flow_component_subtitle02">■ ストリーム情報(Output)</p>
+		<table class="table-simple-list">
+												<tr>
+			<th class="proTitle" colSpan="2">プロパティ</th>
+			</tr>
+			<tr>
+				<th width="150">プロパティ名</th>
+				<th colSpan="1">設定値</th>
+			</tr>
+							<tr>
+  <td bgcolor="#EBEBEB">ストリーム型</td>
+  <td colspan='1'>
+                                          Text
+            </td>
+</tr>
+							<tr>
+  <td bgcolor="#EBEBEB">出力エンコーディング</td>
+  <td colspan='1'>
+                                          utf-8
+            </td>
+</tr>
+								</table>
+		<!-- ログ情報 -->
+		<!-- Mapperの場合 -->
+						<p class="title_flow_component_subtitle02">
+				■ Mapper3マッピング定義　(レイヤー1）
+			</p>
+						<table width="80%" border="1" cellpadding="20" cellspacing="0" bordercolor="#31abb9" bgcolor="#DFF8FF" class="table-simple-list">
+				<tr>
+					<td>
+						<!-- 画面 -->
+						<p class="title_flow_component_subtitle">&nbsp;</p>
+						<img src="F8C2_1.jpeg" usemap="#F8C2_1_map" alt="Mapper3のレイヤー「レイヤー1」の画面" vspace="15" border="1" class="img-simple-list">
+						<map name="F8C2_1_map">
+													</map>
+						<!-- 関数一覧 -->
+												<!-- 関数詳細 -->
+																	</td>
+				</tr>
+			</table>
+				<p class="pagetop"><a href="#TOP">↑ページTOPへ</a></p>
+		<table width="100%" border="0" cellpadding="2" cellspacing="0">
+		<tr>
+			<td width="30" bgcolor="179dc1"><img src="../../img/tag_d.gif" alt="" width="18" height="19" hspace="10" vspace="5" id="RDBGet1"></td>
+			<td bgcolor="#179dc1" class="title_base02"><span class="title_base_index02" id="F8C3">3. RDBGet1コンポーネント</span></td>
+		</tr>
+		<tr>
+			<td colspan="2"><img src="../../img/clear.gif" alt="" width="15" height="15"></td>
+		</tr>
+	</table>
+	<table class="table-simple-list">
+		<tr>
+			<td width="10%" rowspan="5" class="v-center"><div align="center"><img src="../../icons/rdb_get.png" alt="RDBGet" width="32" height="32"></div></td>
+			<th width="120">名前</th>
+			<td>RDBGet1</td>
+		</tr>
+		<tr>
+			<th width="120">種別</th>
+			<td>RDBGet</td>
+		</tr>
+		<tr>
+			<th width="120">入力コンポーネント</th>
+			<td>
+																		<a href="#F8C2">Mapper3</a>
+																</td>
+		</tr>
+		<tr>
+			<th width="120">出力コンポーネント</th>
+			<td>
+																		<a href="#F8C4">Mapper1</a>
+																</td>
+		</tr>
+		<tr>
+			<th width="120">説明</th>
+			<td>&nbsp;</td>
+		</tr>
+	</table>
+	<!-- コンポーネントプロパティ -->
+	<p class="title_flow_component_subtitle02">■ コンポーネントプロパティ</p>
+	<table class="table-simple-list">
+		<tr>
+			<th width="150">プロパティ名</th>
+			<th>設定値</th>
+		</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">汎用</td>
+  <td >
+                                                &nbsp;
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">接続エラー</td>
+  <td >
+                                                &nbsp;
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">レコードが無い</td>
+  <td >
+                                                &nbsp;
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">コネクション名</td>
+  <td >
+                                                <a href="../../connection/connections.html#RDBConnection_pjdb">pjdb</a>
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">SQL文</td>
+  <td >
+                                          SELECT VER_NO <br>
+  FROM PJTM_PJ_HNYO_DT_MNG_MST A <br>
+ WHERE HNYO_SEG_CD = ?SEG_CD?<br>
+   AND  HNYO_SEG_DT_CD = ?SEG_DT_CD?
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">フィルターを指定</td>
+  <td >
+                                          いいえ
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">タイムアウト（秒）</td>
+  <td >
+                                          0
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">ループを開始</td>
+  <td >
+                                          いいえ
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">レコードが無い場合エラー</td>
+  <td >
+                                          はい
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">詳細設定</td>
+  <td >
+                                          &nbsp;
+            </td>
+</tr>
+<tr>
+  <td bgcolor="#EBEBEB">&nbsp;&nbsp;&nbsp;&nbsp;トランザクションに含める</td>
+  <td >
+                                          いいえ
+            </td>
+</tr>
+<tr>
+  <td bgcolor="#EBEBEB">&nbsp;&nbsp;&nbsp;&nbsp;フェッチサイズ</td>
+  <td >
+                                          1000
+            </td>
+</tr>
+<tr>
+  <td bgcolor="#EBEBEB">&nbsp;&nbsp;&nbsp;&nbsp;SQLパラメーターを使用する</td>
+  <td >
+                                          はい
+            </td>
+</tr>
+			</table>
+	<!-- カテゴリープロパティ -->
+						<p class="title_flow_component_subtitle02">■ SQLパラメーター</p>
+			<table class="table-simple-list">
+				<tr>
+											<th width="20%">パラメーター名</th>
+											<th width="20%">データ型</th>
+											<th width="20%">Javaデータ型</th>
+											<th width="20%">値</th>
+									</tr>
+									<tr>
+													<td>SEG_CD</td>
+													<td>String</td>
+													<td>VARCHAR</td>
+													<td>&nbsp;</td>
+											</tr>
+									<tr>
+													<td>SEG_DT_CD</td>
+													<td>String</td>
+													<td>VARCHAR</td>
+													<td>&nbsp;</td>
+											</tr>
+							</table>
+				<!-- ストリーム情報 -->
+			<p class="title_flow_component_subtitle02">■ ストリーム情報(Output)</p>
+		<table class="table-simple-list">
+												<tr>
+			<th class="proTitle" colSpan="2">プロパティ</th>
+			</tr>
+			<tr>
+				<th width="150">プロパティ名</th>
+				<th colSpan="1">設定値</th>
+			</tr>
+							<tr>
+  <td bgcolor="#EBEBEB">ストリーム型</td>
+  <td colspan='1'>
+                                          Record
+            </td>
+</tr>
+										<tr>
+					<th class="proTitle" colSpan="2">フィールド定義</th>
+				</tr>
+				<tr>
+					<th width="20%">Name</th>
+					<th> Type</th>
+									</tr>
+									<tr>
+						<td width="20%" bgcolor="#EBEBEB">VER_NO</td>
+						<td>Decimal</td>
+											</tr>
+									</table>
+		<!-- ログ情報 -->
+		<!-- Mapperの場合 -->
+		<p class="pagetop"><a href="#TOP">↑ページTOPへ</a></p>
+		<table width="100%" border="0" cellpadding="2" cellspacing="0">
+		<tr>
+			<td width="30" bgcolor="179dc1"><img src="../../img/tag_d.gif" alt="" width="18" height="19" hspace="10" vspace="5" id="Mapper1"></td>
+			<td bgcolor="#179dc1" class="title_base02"><span class="title_base_index02" id="F8C4">4. Mapper1コンポーネント</span></td>
+		</tr>
+		<tr>
+			<td colspan="2"><img src="../../img/clear.gif" alt="" width="15" height="15"></td>
+		</tr>
+	</table>
+	<table class="table-simple-list">
+		<tr>
+			<td width="10%" rowspan="5" class="v-center"><div align="center"><img src="../../icons/mapping.png" alt="Mapper" width="32" height="32"></div></td>
+			<th width="120">名前</th>
+			<td>Mapper1</td>
+		</tr>
+		<tr>
+			<th width="120">種別</th>
+			<td>Mapper</td>
+		</tr>
+		<tr>
+			<th width="120">入力コンポーネント</th>
+			<td>
+																		<a href="#F8C3">RDBGet1</a>
+																</td>
+		</tr>
+		<tr>
+			<th width="120">出力コンポーネント</th>
+			<td>
+																		<a href="#F8C5">RDBMerge2</a>
+																</td>
+		</tr>
+		<tr>
+			<th width="120">説明</th>
+			<td>&nbsp;</td>
+		</tr>
+	</table>
+	<!-- コンポーネントプロパティ -->
+	<p class="title_flow_component_subtitle02">■ コンポーネントプロパティ</p>
+	<table class="table-simple-list">
+		<tr>
+			<th width="150">プロパティ名</th>
+			<th>設定値</th>
+		</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">汎用</td>
+  <td >
+                                                &nbsp;
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">ループを開始</td>
+  <td >
+                                          いいえ
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">入力をそのまま出力</td>
+  <td >
+                                          いいえ
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">入力が無い場合エラー</td>
+  <td >
+                                          いいえ
+            </td>
+</tr>
+			</table>
+	<!-- カテゴリープロパティ -->
+					<!-- ストリーム情報 -->
+		<!-- ログ情報 -->
+		<!-- Mapperの場合 -->
+						<p class="title_flow_component_subtitle02">
+				■ Mapper1マッピング定義　(レイヤー1）
+			</p>
+						<table width="80%" border="1" cellpadding="20" cellspacing="0" bordercolor="#31abb9" bgcolor="#DFF8FF" class="table-simple-list">
+				<tr>
+					<td>
+						<!-- 画面 -->
+						<p class="title_flow_component_subtitle">&nbsp;</p>
+						<img src="F8C4_1.jpeg" usemap="#F8C4_1_map" alt="Mapper1のレイヤー「レイヤー1」の画面" vspace="15" border="1" class="img-simple-list">
+						<map name="F8C4_1_map">
+															<area href="#F8C4M1" shape="rect" coords="207,50,243,86" alt="TableDB1"/>
+															<area href="#F8C4M2" shape="rect" coords="207,152,243,188" alt="Const1"/>
+															<area href="#F8C4M3" shape="rect" coords="275,186,311,222" alt="Now1"/>
+															<area href="#F8C4M4" shape="rect" coords="275,254,311,290" alt="Add1"/>
+															<area href="#F8C4M5" shape="rect" coords="207,322,243,358" alt="Const4"/>
+													</map>
+						<!-- 関数一覧 -->
+													<table class="table-simple-list">
+								<caption>● Mapper関数一覧</caption>
+								<tr>
+									<th width="5%" nowrap>番号</th>
+									<th colspan="3">関数名</th>
+								</tr>
+																									<tr>
+										<td width="5%" rowspan="4" nowrap bgcolor="#EDEDED">1</td>
+										<td width="15%" rowspan="4" nowrap bgcolor="#FFFFFF"><a href="#F8C4M1">TableDB1</a></td>
+										<td width="10%" nowrap bgcolor="#EBEBEB">種別</td>
+										<td bgcolor="#FFFFFF">TableDB</td>
+									</tr>
+									<tr>
+										<td width="10%" nowrap bgcolor="#EDEDED">入力</td>
+										<td bgcolor="#FFFFFF">
+																																</td>
+									</tr>
+									<tr>
+										<td width="10%" nowrap bgcolor="#EDEDED">出力</td>
+										<td bgcolor="#FFFFFF">
+																																																											ストリーム/フィールド/MNG_DT
+																																	</td>
+									</tr>
+									<tr>
+										<td width="10%" nowrap bgcolor="#EDEDED">説明</td>
+										<td bgcolor="#FFFFFF">業務日付（オンライン）</td>
+									</tr>
+																										<tr>
+										<td width="5%" rowspan="4" nowrap bgcolor="#EDEDED">2</td>
+										<td width="15%" rowspan="4" nowrap bgcolor="#FFFFFF"><a href="#F8C4M2">Const1</a></td>
+										<td width="10%" nowrap bgcolor="#EBEBEB">種別</td>
+										<td bgcolor="#FFFFFF">Const</td>
+									</tr>
+									<tr>
+										<td width="10%" nowrap bgcolor="#EDEDED">入力</td>
+										<td bgcolor="#FFFFFF">
+																																</td>
+									</tr>
+									<tr>
+										<td width="10%" nowrap bgcolor="#EDEDED">出力</td>
+										<td bgcolor="#FFFFFF">
+																																																											ストリーム/フィールド/UPD_USR_ID
+																																	</td>
+									</tr>
+									<tr>
+										<td width="10%" nowrap bgcolor="#EDEDED">説明</td>
+										<td bgcolor="#FFFFFF">58</td>
+									</tr>
+																										<tr>
+										<td width="5%" rowspan="4" nowrap bgcolor="#EDEDED">3</td>
+										<td width="15%" rowspan="4" nowrap bgcolor="#FFFFFF"><a href="#F8C4M3">Now1</a></td>
+										<td width="10%" nowrap bgcolor="#EBEBEB">種別</td>
+										<td bgcolor="#FFFFFF">Now</td>
+									</tr>
+									<tr>
+										<td width="10%" nowrap bgcolor="#EDEDED">入力</td>
+										<td bgcolor="#FFFFFF">
+																																</td>
+									</tr>
+									<tr>
+										<td width="10%" nowrap bgcolor="#EDEDED">出力</td>
+										<td bgcolor="#FFFFFF">
+																																																											ストリーム/フィールド/UPD_TS
+																																	</td>
+									</tr>
+									<tr>
+										<td width="10%" nowrap bgcolor="#EDEDED">説明</td>
+										<td bgcolor="#FFFFFF">&nbsp;</td>
+									</tr>
+																										<tr>
+										<td width="5%" rowspan="4" nowrap bgcolor="#EDEDED">4</td>
+										<td width="15%" rowspan="4" nowrap bgcolor="#FFFFFF"><a href="#F8C4M4">Add1</a></td>
+										<td width="10%" nowrap bgcolor="#EBEBEB">種別</td>
+										<td bgcolor="#FFFFFF">Add</td>
+									</tr>
+									<tr>
+										<td width="10%" nowrap bgcolor="#EDEDED">入力</td>
+										<td bgcolor="#FFFFFF">
+																																																											ストリーム/RDBGet1/フィールド/VER_NO
+																																																<br>
+																																					<a href="#F8C4M5">Const4</a>
+																																	</td>
+									</tr>
+									<tr>
+										<td width="10%" nowrap bgcolor="#EDEDED">出力</td>
+										<td bgcolor="#FFFFFF">
+																																																											ストリーム/フィールド/VER_NO
+																																	</td>
+									</tr>
+									<tr>
+										<td width="10%" nowrap bgcolor="#EDEDED">説明</td>
+										<td bgcolor="#FFFFFF">&nbsp;</td>
+									</tr>
+																										<tr>
+										<td width="5%" rowspan="4" nowrap bgcolor="#EDEDED">5</td>
+										<td width="15%" rowspan="4" nowrap bgcolor="#FFFFFF"><a href="#F8C4M5">Const4</a></td>
+										<td width="10%" nowrap bgcolor="#EBEBEB">種別</td>
+										<td bgcolor="#FFFFFF">Const</td>
+									</tr>
+									<tr>
+										<td width="10%" nowrap bgcolor="#EDEDED">入力</td>
+										<td bgcolor="#FFFFFF">
+																																</td>
+									</tr>
+									<tr>
+										<td width="10%" nowrap bgcolor="#EDEDED">出力</td>
+										<td bgcolor="#FFFFFF">
+																																																											<a href="#F8C4M4">Add1</a>
+																																	</td>
+									</tr>
+									<tr>
+										<td width="10%" nowrap bgcolor="#EDEDED">説明</td>
+										<td bgcolor="#FFFFFF">1</td>
+									</tr>
+																								</table>
+												<!-- 関数詳細 -->
+																			<p class="title_flow_mappler_title" id="F8C4M1">1. TableDB1関数</p>
+							<table class="table-simple-list">
+								<tr>
+									<td width="10%" rowspan="4" bgcolor="#FFFFFF" class="v-center"><div align="center"><img src="../../icons/ex_table_DB.png" alt="TableDB" id="Mapper1-TableDB1" width="32" height="32"></div></td>
+									<th width="120">名前</th>
+									<td bgcolor="#FFFFFF">TableDB1</td>
+								</tr>
+								<tr>
+									<th width="120">種別</th>
+									<td bgcolor="#FFFFFF">TableDB</td>
+								</tr>
+								<tr>
+									<th width="120">説明</th>
+									<td bgcolor="#FFFFFF">業務日付（オンライン）</td>
+								</tr>
+																									<tr>
+										<th width="120">出力1</th>
+										<td bgcolor="#FFFFFF">
+																							ストリーム/フィールド/MNG_DT
+																					</td>
+									</tr>
+																								</table>
+							<p class="title_flow_mappler_pp">▼ 関数プロパティ</p>
+							<table class="table-simple-list">
+								<tr>
+									<th width="150">プロパティ名</th>
+									<th>設定値</th>
+								</tr>
+																	<tr>
+  <td bgcolor="#EBEBEB">コネクション名</td>
+  <td bgcolor='#FFFFFF'>
+                                                <a href="../../connection/connections.html#RDBConnection_pjdb">pjdb</a>
+            </td>
+</tr>
+																	<tr>
+  <td bgcolor="#EBEBEB">SQL文</td>
+  <td bgcolor='#FFFFFF'>
+                                          SELECT BUSI_DT <br>
+  FROM PJTM_FW_BUSI_DT A <br>
+ WHERE ON_BAT_SEG = 'OL'
+            </td>
+</tr>
+																	<tr>
+  <td bgcolor="#EBEBEB">区切り文字</td>
+  <td bgcolor='#FFFFFF'>
+                                          ,
+            </td>
+</tr>
+																	<tr>
+  <td bgcolor="#EBEBEB">フィールドが複数の場合</td>
+  <td bgcolor='#FFFFFF'>
+                                          複数出力
+            </td>
+</tr>
+																	<tr>
+  <td bgcolor="#EBEBEB">レコードが複数の場合</td>
+  <td bgcolor='#FFFFFF'>
+                                          エラーを発生
+            </td>
+</tr>
+																	<tr>
+  <td bgcolor="#EBEBEB">レコードが無い場合</td>
+  <td bgcolor='#FFFFFF'>
+                                          nullを出力
+            </td>
+</tr>
+																	<tr>
+  <td bgcolor="#EBEBEB">固定値</td>
+  <td bgcolor='#FFFFFF'>
+                                          &nbsp;
+            </td>
+</tr>
+															</table>
+																				<p class="title_flow_mappler_title" id="F8C4M2">2. Const1関数</p>
+							<table class="table-simple-list">
+								<tr>
+									<td width="10%" rowspan="4" bgcolor="#FFFFFF" class="v-center"><div align="center"><img src="../../icons/str_const.png" alt="Const" id="Mapper1-Const1" width="32" height="32"></div></td>
+									<th width="120">名前</th>
+									<td bgcolor="#FFFFFF">Const1</td>
+								</tr>
+								<tr>
+									<th width="120">種別</th>
+									<td bgcolor="#FFFFFF">Const</td>
+								</tr>
+								<tr>
+									<th width="120">説明</th>
+									<td bgcolor="#FFFFFF">58</td>
+								</tr>
+																									<tr>
+										<th width="120">出力1</th>
+										<td bgcolor="#FFFFFF">
+																							ストリーム/フィールド/UPD_USR_ID
+																					</td>
+									</tr>
+																								</table>
+							<p class="title_flow_mappler_pp">▼ 関数プロパティ</p>
+							<table class="table-simple-list">
+								<tr>
+									<th width="150">プロパティ名</th>
+									<th>設定値</th>
+								</tr>
+																	<tr>
+  <td bgcolor="#EBEBEB">データ</td>
+  <td bgcolor='#FFFFFF'>
+                                          58
+            </td>
+</tr>
+																	<tr>
+  <td bgcolor="#EBEBEB">データ型</td>
+  <td bgcolor='#FFFFFF'>
+                                          Decimal
+            </td>
+</tr>
+															</table>
+																				<p class="title_flow_mappler_title" id="F8C4M3">3. Now1関数</p>
+							<table class="table-simple-list">
+								<tr>
+									<td width="10%" rowspan="4" bgcolor="#FFFFFF" class="v-center"><div align="center"><img src="../../icons/date_now.png" alt="Now" id="Mapper1-Now1" width="32" height="32"></div></td>
+									<th width="120">名前</th>
+									<td bgcolor="#FFFFFF">Now1</td>
+								</tr>
+								<tr>
+									<th width="120">種別</th>
+									<td bgcolor="#FFFFFF">Now</td>
+								</tr>
+								<tr>
+									<th width="120">説明</th>
+									<td bgcolor="#FFFFFF">&nbsp;</td>
+								</tr>
+																									<tr>
+										<th width="120">出力1</th>
+										<td bgcolor="#FFFFFF">
+																							ストリーム/フィールド/UPD_TS
+																					</td>
+									</tr>
+																								</table>
+							<p class="title_flow_mappler_pp">▼ 関数プロパティ</p>
+							<table class="table-simple-list">
+								<tr>
+									<th width="150">プロパティ名</th>
+									<th>設定値</th>
+								</tr>
+																	<tr>
+  <td bgcolor="#EBEBEB">日付フォーマット</td>
+  <td bgcolor='#FFFFFF'>
+                                          DateTime型
+            </td>
+</tr>
+																	<tr>
+  <td bgcolor="#EBEBEB">時刻を設定しない</td>
+  <td bgcolor='#FFFFFF'>
+                                          いいえ
+            </td>
+</tr>
+															</table>
+																				<p class="title_flow_mappler_title" id="F8C4M4">4. Add1関数</p>
+							<table class="table-simple-list">
+								<tr>
+									<td width="10%" rowspan="6" bgcolor="#FFFFFF" class="v-center"><div align="center"><img src="../../icons/num_add.png" alt="Add" id="Mapper1-Add1" width="32" height="32"></div></td>
+									<th width="120">名前</th>
+									<td bgcolor="#FFFFFF">Add1</td>
+								</tr>
+								<tr>
+									<th width="120">種別</th>
+									<td bgcolor="#FFFFFF">Add</td>
+								</tr>
+								<tr>
+									<th width="120">説明</th>
+									<td bgcolor="#FFFFFF">&nbsp;</td>
+								</tr>
+																	<tr>
+										<th width="120">入力1</th>
+										<td bgcolor="#FFFFFF">
+																																		ストリーム/RDBGet1/フィールド/VER_NO
+																					</td>
+									</tr>
+																	<tr>
+										<th width="120">入力2</th>
+										<td bgcolor="#FFFFFF">
+																																		<a href="#F8C4M5">Const4</a>
+																					</td>
+									</tr>
+																									<tr>
+										<th width="120">出力1</th>
+										<td bgcolor="#FFFFFF">
+																							ストリーム/フィールド/VER_NO
+																					</td>
+									</tr>
+																								</table>
+							<p class="title_flow_mappler_pp">▼ 関数プロパティ</p>
+							<table class="table-simple-list">
+								<tr>
+									<th width="150">プロパティ名</th>
+									<th>設定値</th>
+								</tr>
+																	<tr>
+  <td bgcolor="#EBEBEB">データ</td>
+  <td bgcolor='#FFFFFF'>
+                                          &nbsp;
+            </td>
+</tr>
+																	<tr>
+  <td bgcolor="#EBEBEB">スケール</td>
+  <td bgcolor='#FFFFFF'>
+                                          &nbsp;
+            </td>
+</tr>
+															</table>
+																				<p class="title_flow_mappler_title" id="F8C4M5">5. Const4関数</p>
+							<table class="table-simple-list">
+								<tr>
+									<td width="10%" rowspan="4" bgcolor="#FFFFFF" class="v-center"><div align="center"><img src="../../icons/str_const.png" alt="Const" id="Mapper1-Const4" width="32" height="32"></div></td>
+									<th width="120">名前</th>
+									<td bgcolor="#FFFFFF">Const4</td>
+								</tr>
+								<tr>
+									<th width="120">種別</th>
+									<td bgcolor="#FFFFFF">Const</td>
+								</tr>
+								<tr>
+									<th width="120">説明</th>
+									<td bgcolor="#FFFFFF">1</td>
+								</tr>
+																									<tr>
+										<th width="120">出力1</th>
+										<td bgcolor="#FFFFFF">
+																							<a href="#F8C4M4">Add1</a>
+																					</td>
+									</tr>
+																								</table>
+							<p class="title_flow_mappler_pp">▼ 関数プロパティ</p>
+							<table class="table-simple-list">
+								<tr>
+									<th width="150">プロパティ名</th>
+									<th>設定値</th>
+								</tr>
+																	<tr>
+  <td bgcolor="#EBEBEB">データ</td>
+  <td bgcolor='#FFFFFF'>
+                                          1
+            </td>
+</tr>
+																	<tr>
+  <td bgcolor="#EBEBEB">データ型</td>
+  <td bgcolor='#FFFFFF'>
+                                          Decimal
+            </td>
+</tr>
+															</table>
+																		</td>
+				</tr>
+			</table>
+				<p class="pagetop"><a href="#TOP">↑ページTOPへ</a></p>
+		<table width="100%" border="0" cellpadding="2" cellspacing="0">
+		<tr>
+			<td width="30" bgcolor="179dc1"><img src="../../img/tag_d.gif" alt="" width="18" height="19" hspace="10" vspace="5" id="RDBMerge2"></td>
+			<td bgcolor="#179dc1" class="title_base02"><span class="title_base_index02" id="F8C5">5. RDBMerge2コンポーネント</span></td>
+		</tr>
+		<tr>
+			<td colspan="2"><img src="../../img/clear.gif" alt="" width="15" height="15"></td>
+		</tr>
+	</table>
+	<table class="table-simple-list">
+		<tr>
+			<td width="10%" rowspan="5" class="v-center"><div align="center"><img src="../../icons/rdb_merge.png" alt="RDBMerge" width="32" height="32"></div></td>
+			<th width="120">名前</th>
+			<td>RDBMerge2</td>
+		</tr>
+		<tr>
+			<th width="120">種別</th>
+			<td>RDBMerge</td>
+		</tr>
+		<tr>
+			<th width="120">入力コンポーネント</th>
+			<td>
+																		<a href="#F8C4">Mapper1</a>
+																</td>
+		</tr>
+		<tr>
+			<th width="120">出力コンポーネント</th>
+			<td>
+																		<a href="#F8C6">End1</a>
+																</td>
+		</tr>
+		<tr>
+			<th width="120">説明</th>
+			<td>&nbsp;</td>
+		</tr>
+	</table>
+	<!-- コンポーネントプロパティ -->
+	<p class="title_flow_component_subtitle02">■ コンポーネントプロパティ</p>
+	<table class="table-simple-list">
+		<tr>
+			<th width="150">プロパティ名</th>
+			<th>設定値</th>
+		</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">汎用</td>
+  <td >
+                                                &nbsp;
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">接続エラー</td>
+  <td >
+                                                &nbsp;
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">コネクション名</td>
+  <td >
+                                                <a href="../../connection/connections.html#RDBConnection_pjdb">pjdb</a>
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">テーブル名</td>
+  <td >
+                                          PJNAVI.PJTM_PJ_HNYO_DT_MNG_MST
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">バッチ処理件数</td>
+  <td >
+                                          100
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">処理件数</td>
+  <td >
+                                          &nbsp;
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">タイムアウト（秒）</td>
+  <td >
+                                          0
+            </td>
+</tr>
+			</table>
+	<!-- カテゴリープロパティ -->
+						<p class="title_flow_component_subtitle02">■ 入力</p>
+			<table class="table-simple-list">
+				<tr>
+											<th width="20%">フィールド名</th>
+											<th width="20%">データ型</th>
+											<th width="20%">種別</th>
+											<th width="20%">表示名</th>
+									</tr>
+									<tr>
+													<td>HNYO_SEG_CD</td>
+													<td>String</td>
+													<td>true</td>
+													<td>&nbsp;</td>
+											</tr>
+									<tr>
+													<td>HNYO_SEG_DT_CD</td>
+													<td>String</td>
+													<td>true</td>
+													<td>&nbsp;</td>
+											</tr>
+									<tr>
+													<td>MNG_DT</td>
+													<td>DateTime</td>
+													<td>false</td>
+													<td>&nbsp;</td>
+											</tr>
+									<tr>
+													<td>UPD_USR_ID</td>
+													<td>Decimal</td>
+													<td>false</td>
+													<td>&nbsp;</td>
+											</tr>
+									<tr>
+													<td>UPD_PGM_ID</td>
+													<td>String</td>
+													<td>false</td>
+													<td>&nbsp;</td>
+											</tr>
+									<tr>
+													<td>UPD_TS</td>
+													<td>DateTime</td>
+													<td>false</td>
+													<td>&nbsp;</td>
+											</tr>
+									<tr>
+													<td>VER_NO</td>
+													<td>Decimal</td>
+													<td>false</td>
+													<td>&nbsp;</td>
+											</tr>
+							</table>
+				<!-- ストリーム情報 -->
+			<p class="title_flow_component_subtitle02">■ ストリーム情報(Input)</p>
+		<table class="table-simple-list">
+												<tr>
+			<th class="proTitle" colSpan="2">プロパティ</th>
+			</tr>
+			<tr>
+				<th width="150">プロパティ名</th>
+				<th colSpan="1">設定値</th>
+			</tr>
+							<tr>
+  <td bgcolor="#EBEBEB">ストリーム型</td>
+  <td colspan='1'>
+                                          Record
+            </td>
+</tr>
+										<tr>
+					<th class="proTitle" colSpan="2">フィールド定義</th>
+				</tr>
+				<tr>
+					<th width="20%">Name</th>
+					<th> Type</th>
+									</tr>
+									<tr>
+						<td width="20%" bgcolor="#EBEBEB">HNYO_SEG_CD</td>
+						<td>String</td>
+											</tr>
+									<tr>
+						<td width="20%" bgcolor="#EBEBEB">HNYO_SEG_DT_CD</td>
+						<td>String</td>
+											</tr>
+									<tr>
+						<td width="20%" bgcolor="#EBEBEB">MNG_DT</td>
+						<td>DateTime</td>
+											</tr>
+									<tr>
+						<td width="20%" bgcolor="#EBEBEB">UPD_USR_ID</td>
+						<td>Decimal</td>
+											</tr>
+									<tr>
+						<td width="20%" bgcolor="#EBEBEB">UPD_PGM_ID</td>
+						<td>String</td>
+											</tr>
+									<tr>
+						<td width="20%" bgcolor="#EBEBEB">UPD_TS</td>
+						<td>DateTime</td>
+											</tr>
+									<tr>
+						<td width="20%" bgcolor="#EBEBEB">VER_NO</td>
+						<td>Decimal</td>
+											</tr>
+									</table>
+		<!-- ログ情報 -->
+		<!-- Mapperの場合 -->
+		<p class="pagetop"><a href="#TOP">↑ページTOPへ</a></p>
+		<table width="100%" border="0" cellpadding="2" cellspacing="0">
+		<tr>
+			<td width="30" bgcolor="179dc1"><img src="../../img/tag_d.gif" alt="" width="18" height="19" hspace="10" vspace="5" id="End1"></td>
+			<td bgcolor="#179dc1" class="title_base02"><span class="title_base_index02" id="F8C6">6. End1コンポーネント</span></td>
+		</tr>
+		<tr>
+			<td colspan="2"><img src="../../img/clear.gif" alt="" width="15" height="15"></td>
+		</tr>
+	</table>
+	<table class="table-simple-list">
+		<tr>
+			<td width="10%" rowspan="5" class="v-center"><div align="center"><img src="../../icons/end.png" alt="End" width="32" height="32"></div></td>
+			<th width="120">名前</th>
+			<td>End1</td>
+		</tr>
+		<tr>
+			<th width="120">種別</th>
+			<td>End</td>
+		</tr>
+		<tr>
+			<th width="120">入力コンポーネント</th>
+			<td>
+																		<a href="#F8C5">RDBMerge2</a>
+																</td>
+		</tr>
+		<tr>
+			<th width="120">出力コンポーネント</th>
+			<td>
+																	&nbsp;
+							</td>
+		</tr>
+		<tr>
+			<th width="120">説明</th>
+			<td>&nbsp;</td>
+		</tr>
+	</table>
+	<!-- コンポーネントプロパティ -->
+	<p class="title_flow_component_subtitle02">■ コンポーネントプロパティ</p>
+	<table class="table-simple-list">
+		<tr>
+			<th width="150">プロパティ名</th>
+			<th>設定値</th>
+		</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">トランザクション</td>
+  <td >
+                                          コミット
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">戻り値</td>
+  <td >
+                                          &nbsp;
+            </td>
+</tr>
+			</table>
+	<!-- カテゴリープロパティ -->
+		<!-- ストリーム情報 -->
+		<!-- ログ情報 -->
+		<!-- Mapperの場合 -->
+		<p class="pagetop"><a href="#TOP">↑ページTOPへ</a></p>
+	<p/>
+<!-- print -->
+</div>
+</body>
+</html>

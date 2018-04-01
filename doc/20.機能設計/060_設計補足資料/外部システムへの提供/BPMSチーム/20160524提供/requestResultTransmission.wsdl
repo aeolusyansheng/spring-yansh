@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions name="pjnavi" targetNamespace="http://pjnavi.ctc-g.co.jp/schema/external/requestResultTransmission" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://pjnavi.ctc-g.co.jp/schema/external/requestResultTransmission" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<types>
+		<xsd:schema targetNamespace="http://pjnavi.ctc-g.co.jp/schema/external/requestResultTransmission">
+			<xsd:complexType name="getProjectInformation">
+				<xsd:sequence>
+					<xsd:element name="companySeg" type="xsd:string"/>
+					<xsd:element name="projectCd" type="xsd:string"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:element name="getProjectInformation" type="tns:getProjectInformation"/>
+			<xsd:complexType name="projectInformation_NN">
+				<xsd:sequence>
+					<xsd:element name="companySeg" type="xsd:string"/>
+					<xsd:element name="projectCd" type="xsd:string"/>
+					<xsd:element name="projectName" type="xsd:string"/>
+					<xsd:element name="projectType" type="xsd:string"/>
+					<xsd:element name="projectTypeName" type="xsd:string"/>
+					<xsd:element name="developmentDeptCd" type="xsd:string"/>
+					<xsd:element name="developmentDeptName" type="xsd:string"/>
+					<xsd:element name="quotientMaterialsDivisionCd" type="xsd:string"/>
+					<xsd:element name="workObjectCd" type="xsd:string"/>
+					<xsd:element name="itemCd" type="xsd:string"/>
+					<xsd:element name="itemName" type="xsd:string"/>
+					<xsd:element name="projectStatus" type="xsd:string"/>
+					<xsd:element name="projectStatusName" type="xsd:string"/>
+					<xsd:element name="projectStartDay" type="xsd:string"/>
+					<xsd:element name="projectEndDay" type="xsd:string"/>
+					<xsd:element name="minimumSalePrice" type="xsd:long"/>
+					<xsd:element name="businessInCompany" type="xsd:string"/>
+					<xsd:element name="amountOfBusinessInTheCompany" type="xsd:long"/>
+					<xsd:element name="profitCostPriceEstimatedCost" type="xsd:long"/>
+					<xsd:element name="versionNumber" type="xsd:string"/>
+					<xsd:element name="leadStartDivision" type="xsd:string"/>
+					<xsd:element name="leadStartStartingDate" type="xsd:string"/>
+					<xsd:element name="leadStartEndDate" type="xsd:string"/>
+					<xsd:element name="progressDivision" type="xsd:string"/>
+					<xsd:element name="developmentCompletionReportStatus" type="xsd:string"/>
+					<xsd:element name="leadWipAmountPlanned" type="xsd:long"/>
+					<xsd:element name="wipTotalAmount" type="xsd:long"/>
+					<xsd:element name="salesEmpCd" type="xsd:string"/>
+					<xsd:element name="salesEmpName" type="xsd:string"/>
+					<xsd:element name="costTransferDeptCd" type="xsd:string"/>
+					<xsd:element name="costTransferDeptName" type="xsd:string"/>
+					<xsd:element name="hasReportedProjectCancel" type="xsd:string"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="getProjectInformationResponse">
+				<xsd:sequence>
+					<xsd:element name="resultCd" type="xsd:long"/>
+					<xsd:element name="projectInformation" type="tns:projectInformation_NN"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:element name="getProjectInformationResponse" type="tns:getProjectInformationResponse"/>
+			<xsd:complexType name="getResultTransferInformation">
+				<xsd:sequence>
+					<xsd:element name="companySeg" type="xsd:string"/>
+					<xsd:element name="transferApplicationNumber" type="xsd:string"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:element name="getResultTransferInformation" type="tns:getResultTransferInformation"/>
+			<xsd:complexType name="resultTransferInformation_NN">
+				<xsd:sequence>
+					<xsd:element name="totalAmount" type="xsd:long"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="getResultTransferInformationResponse">
+				<xsd:sequence>
+					<xsd:element name="resultCd" type="xsd:long"/>
+					<xsd:element name="resultTransferInformation" type="tns:resultTransferInformation_NN"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:element name="getResultTransferInformationResponse" type="tns:getResultTransferInformationResponse"/>
+			<xsd:complexType name="getShipRequestInformation">
+				<xsd:sequence>
+					<xsd:element name="companySeg" type="xsd:string"/>
+					<xsd:element name="shipRequestNumber" type="xsd:string"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:element name="getShipRequestInformation" type="tns:getShipRequestInformation"/>
+			<xsd:complexType name="shipRequestInformation_NN">
+				<xsd:sequence>
+					<xsd:element name="isCtcGroupSupplier" type="xsd:string"/>
+					<xsd:element name="shipAmount" type="xsd:long"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="getShipRequestInformationResponse">
+				<xsd:sequence>
+					<xsd:element name="resultCd" type="xsd:long"/>
+					<xsd:element name="shipRequestInformation" type="tns:shipRequestInformation_NN"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:element name="getShipRequestInformationResponse" type="tns:getShipRequestInformationResponse"/>
+		</xsd:schema>
+	</types>
+	<message name="getProjectInformationRequest">
+		<part element="tns:getProjectInformation" name="getProjectInformation"/>
+	</message>
+	<message name="getProjectInformationResponse">
+		<part element="tns:getProjectInformationResponse" name="getProjectInformationResponse"/>
+	</message>
+	<message name="getResultTransferInformationRequest">
+		<part element="tns:getResultTransferInformation" name="getResultTransferInformation"/>
+	</message>
+	<message name="getResultTransferInformationResponse">
+		<part element="tns:getResultTransferInformationResponse" name="getResultTransferInformationResponse"/>
+	</message>
+	<message name="getShipRequestInformationRequest">
+		<part element="tns:getShipRequestInformation" name="getShipRequestInformation"/>
+	</message>
+	<message name="getShipRequestInformationResponse">
+		<part element="tns:getShipRequestInformationResponse" name="getShipRequestInformationResponse"/>
+	</message>
+	<portType name="pjnaviPort">
+		<operation name="getResultTransferInformation">
+			<input message="tns:getResultTransferInformationRequest"/>
+			<output message="tns:getResultTransferInformationResponse"/>
+		</operation>
+		<operation name="getProjectInformation">
+			<input message="tns:getProjectInformationRequest"/>
+			<output message="tns:getProjectInformationResponse"/>
+		</operation>
+		<operation name="getShipRequestInformation">
+			<input message="tns:getShipRequestInformationRequest"/>
+			<output message="tns:getShipRequestInformationResponse"/>
+		</operation>
+	</portType>
+	<binding name="pjnaviSoapBinding" type="tns:pjnaviPort">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<operation name="getResultTransferInformation">
+			<soap:operation soapAction=""/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="getProjectInformation">
+			<soap:operation soapAction=""/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="getShipRequestInformation">
+			<soap:operation soapAction=""/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+		</operation>
+	</binding>
+	<service name="pjnaviService">
+		<port binding="tns:pjnaviSoapBinding" name="pjnaviPort">
+			<soap:address location="http://131.248.147.215:80/soap/pjnavi/requestresulttransmission"/>
+		</port>
+	</service>
+</definitions>

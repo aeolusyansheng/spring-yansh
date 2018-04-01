@@ -1,0 +1,324 @@
+﻿<html>
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="content-type">
+	<title>Catch_Success仕様書</title>
+	<meta http-equiv="content-style-type" content="text/css">
+	<meta http-equiv="content-script-type" content="text/javascript">
+	<link rel="stylesheet" href="../../style_typeA.css" type="text/css">
+</head>
+<body bgcolor="#ffffff">
+<div id="main_wrap">
+<!-- print -->
+<!-- タイトル -->
+<table width="100%" border="1" cellpadding="0" cellspacing="0" id="TOP">
+<tr>
+	<td bgcolor="#047391">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td><font color="#FFFFFF"><img src="../../img/header_b_flow.gif" alt="" width="425" height="58" hspace="4" vspace="5"></font></td>
+			<td><div align="right"><img src="../../img/header_b_logo.gif" alt="" width="216" height="58" hspace="4" vspace="5"></div></td>
+		</tr>
+		</table>
+	</td>
+</tr>
+<tr>
+	<td bordercolor="#969696" bgcolor="#666666" class="head_title"><span class="head_subtitle02">プロジェクト名：<a href="main.html">ATRLNK010</a> ／ フロー名：Catch_Success</span></td>
+</tr>
+</table>
+<!-- 概要 -->
+<table width="100%" border="0" cellpadding="2" cellspacing="0">
+<tr>
+	<td width="50"><img src="../../img/icon_flow.gif" alt="" width="26" height="23" hspace="10" vspace="10"></td>
+	<td class="title_base02">Catch_Successの説明</td>
+</tr>
+<tr>
+	<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+<!-- 画面 -->
+<p class="head_subtitle_02_02">● フロー画面</p>
+<p><img src="F4.jpeg" alt="Catch_Successのフロー画面" border="1" class="img-simple-list" usemap="#F4_map"></p>
+<map name="F4_map">
+			<area href="#F4C1" shape="rect" coords="16,16,52,52" alt="Start1"/>
+			<area href="#F4C2" shape="rect" coords="16,84,52,120" alt="End1"/>
+	</map>
+<!-- 実行設定 -->
+<!-- 被参照検索 -->
+			<p class="title_flow_index">● このフローを参照しているコンポーネント</p>
+		<table class="table-simple-list">
+			<tr>
+				<th width="35%">プロジェクト名</th>
+				<th width="35%">フロー名</th>
+				<th>コンポーネント名</th>
+			</tr>
+							<tr>
+																<td width="35%"><a href="../../project/Flow_ProxyFlow_EAI_PJ2PPM_ATRLNK010/main.html">ATRLNK010</a></td>
+						<td width="35%"><a href="../../project/Flow_ProxyFlow_EAI_PJ2PPM_ATRLNK010/F7.html">Delete_Folders</a></td>
+						<td><a href="../../project/Flow_ProxyFlow_EAI_PJ2PPM_ATRLNK010/F7.html#FileList1">FileList1</a></td>
+									</tr>
+					</table>
+	<!-- プロパティ -->
+<p class="head_subtitle_02_02">● フロープロパティ</p>
+<table class="table-simple-list">
+<tr>
+	<th width="150">プロパティ名</th>
+	<th>設定値</th>
+</tr>
+<tr>
+  <td bgcolor="#EBEBEB">タイムアウト（秒）</td>
+  <td >
+                                          180
+            </td>
+</tr>
+<tr>
+  <td bgcolor="#EBEBEB">汎用エラー処理</td>
+  <td >
+                                                &nbsp;
+            </td>
+</tr>
+<tr>
+  <td bgcolor="#EBEBEB">実行を許可するユーザー</td>
+  <td >
+                                          &nbsp;
+            </td>
+</tr>
+<tr>
+  <td bgcolor="#EBEBEB">アプリケーションログ設定</td>
+  <td >
+                                          &nbsp;
+            </td>
+</tr>
+<tr>
+  <td bgcolor="#EBEBEB">&nbsp;&nbsp;&nbsp;&nbsp;ログ設定名</td>
+  <td >
+                                          (なし)
+            </td>
+</tr>
+<tr>
+  <td bgcolor="#EBEBEB">&nbsp;&nbsp;&nbsp;&nbsp;ログレベル</td>
+  <td >
+                                          システム設定
+            </td>
+</tr>
+<tr>
+  <td bgcolor="#EBEBEB">&nbsp;&nbsp;&nbsp;&nbsp;システムログに出力</td>
+  <td >
+                                          はい
+            </td>
+</tr>
+<tr>
+  <td bgcolor="#EBEBEB">セッション</td>
+  <td >
+                                          終了時に閉じる
+            </td>
+</tr>
+<tr>
+  <td bgcolor="#EBEBEB">HTTPでの呼出しを許可</td>
+  <td >
+                                          いいえ
+            </td>
+</tr>
+</table>
+<!-- フロー変数 -->
+<!-- コンポーネント一覧 -->
+<p class="head_subtitle_02_02">● コンポーネント一覧</p>
+<table class="table-simple-list">
+<tr>
+	<th>番号</th>
+	<th>コンポーネント名</th>
+	<th>種別</th>
+	<th>入力<br/>コンポーネント</th>
+	<th>出力<br/>コンポーネント</th>
+	<th>説明</th>
+	<th>ログ</th>
+</tr>
+	<tr>
+		<td bgcolor="#EBEBEB">1</td>
+		<td><a href="#F4C1">Start1</a></td>
+		<td>Start</td>
+		<td>
+													&nbsp;
+					</td>
+		<td>
+														<a href="#F4C2">End1</a>
+												</td>
+		<td>&nbsp;</td>
+		<td>
+							&nbsp;
+					</td>
+	</tr>
+		<tr>
+		<td bgcolor="#EBEBEB">2</td>
+		<td><a href="#F4C2">End1</a></td>
+		<td>End</td>
+		<td>
+														<a href="#F4C1">Start1</a>
+												</td>
+		<td>
+													&nbsp;
+					</td>
+		<td>&nbsp;</td>
+		<td>
+							&nbsp;
+					</td>
+	</tr>
+	</table>
+<p class="pagetop"><a href="#TOP">↑ページTOPへ</a></p>
+<hr class="dot"/>
+<!-- コンポーネント詳細 -->
+<p class="head_subtitle_02_02">● 各コンポーネントの詳細</p>
+	<table width="100%" border="0" cellpadding="2" cellspacing="0">
+		<tr>
+			<td width="30" bgcolor="179dc1"><img src="../../img/tag_d.gif" alt="" width="18" height="19" hspace="10" vspace="5" id="Start1"></td>
+			<td bgcolor="#179dc1" class="title_base02"><span class="title_base_index02" id="F4C1">1. Start1コンポーネント</span></td>
+		</tr>
+		<tr>
+			<td colspan="2"><img src="../../img/clear.gif" alt="" width="15" height="15"></td>
+		</tr>
+	</table>
+	<table class="table-simple-list">
+		<tr>
+			<td width="10%" rowspan="5" class="v-center"><div align="center"><img src="../../icons/start.png" alt="Start" width="32" height="32"></div></td>
+			<th width="120">名前</th>
+			<td>Start1</td>
+		</tr>
+		<tr>
+			<th width="120">種別</th>
+			<td>Start</td>
+		</tr>
+		<tr>
+			<th width="120">入力コンポーネント</th>
+			<td>
+																	&nbsp;
+							</td>
+		</tr>
+		<tr>
+			<th width="120">出力コンポーネント</th>
+			<td>
+																		<a href="#F4C2">End1</a>
+																</td>
+		</tr>
+		<tr>
+			<th width="120">説明</th>
+			<td>&nbsp;</td>
+		</tr>
+	</table>
+	<!-- コンポーネントプロパティ -->
+	<p class="title_flow_component_subtitle02">■ コンポーネントプロパティ</p>
+	<table class="table-simple-list">
+		<tr>
+			<th width="150">プロパティ名</th>
+			<th>設定値</th>
+		</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">汎用</td>
+  <td >
+                                                &nbsp;
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">トランザクション化</td>
+  <td >
+                                          いいえ
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">チェックポイントを使用</td>
+  <td >
+                                          いいえ
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">実行権限名</td>
+  <td >
+                                          &nbsp;
+            </td>
+</tr>
+			</table>
+	<!-- カテゴリープロパティ -->
+		<!-- ストリーム情報 -->
+			<p class="title_flow_component_subtitle02">■ ストリーム情報(Output)</p>
+		<table class="table-simple-list">
+												<tr>
+			<th class="proTitle" colSpan="2">プロパティ</th>
+			</tr>
+			<tr>
+				<th width="150">プロパティ名</th>
+				<th colSpan="1">設定値</th>
+			</tr>
+							<tr>
+  <td bgcolor="#EBEBEB">ストリーム型</td>
+  <td colspan='1'>
+                                          Any
+            </td>
+</tr>
+								</table>
+		<!-- ログ情報 -->
+		<!-- Mapperの場合 -->
+		<p class="pagetop"><a href="#TOP">↑ページTOPへ</a></p>
+		<table width="100%" border="0" cellpadding="2" cellspacing="0">
+		<tr>
+			<td width="30" bgcolor="179dc1"><img src="../../img/tag_d.gif" alt="" width="18" height="19" hspace="10" vspace="5" id="End1"></td>
+			<td bgcolor="#179dc1" class="title_base02"><span class="title_base_index02" id="F4C2">2. End1コンポーネント</span></td>
+		</tr>
+		<tr>
+			<td colspan="2"><img src="../../img/clear.gif" alt="" width="15" height="15"></td>
+		</tr>
+	</table>
+	<table class="table-simple-list">
+		<tr>
+			<td width="10%" rowspan="5" class="v-center"><div align="center"><img src="../../icons/end.png" alt="End" width="32" height="32"></div></td>
+			<th width="120">名前</th>
+			<td>End1</td>
+		</tr>
+		<tr>
+			<th width="120">種別</th>
+			<td>End</td>
+		</tr>
+		<tr>
+			<th width="120">入力コンポーネント</th>
+			<td>
+																		<a href="#F4C1">Start1</a>
+																</td>
+		</tr>
+		<tr>
+			<th width="120">出力コンポーネント</th>
+			<td>
+																	&nbsp;
+							</td>
+		</tr>
+		<tr>
+			<th width="120">説明</th>
+			<td>&nbsp;</td>
+		</tr>
+	</table>
+	<!-- コンポーネントプロパティ -->
+	<p class="title_flow_component_subtitle02">■ コンポーネントプロパティ</p>
+	<table class="table-simple-list">
+		<tr>
+			<th width="150">プロパティ名</th>
+			<th>設定値</th>
+		</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">トランザクション</td>
+  <td >
+                                          ロールバック
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">戻り値</td>
+  <td >
+                                          0
+            </td>
+</tr>
+			</table>
+	<!-- カテゴリープロパティ -->
+		<!-- ストリーム情報 -->
+		<!-- ログ情報 -->
+		<!-- Mapperの場合 -->
+		<p class="pagetop"><a href="#TOP">↑ページTOPへ</a></p>
+	<p/>
+<!-- print -->
+</div>
+</body>
+</html>

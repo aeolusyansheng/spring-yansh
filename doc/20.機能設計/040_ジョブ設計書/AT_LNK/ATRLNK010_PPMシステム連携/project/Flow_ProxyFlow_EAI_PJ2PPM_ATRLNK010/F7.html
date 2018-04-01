@@ -1,0 +1,1603 @@
+﻿<html>
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="content-type">
+	<title>Delete_Folders仕様書</title>
+	<meta http-equiv="content-style-type" content="text/css">
+	<meta http-equiv="content-script-type" content="text/javascript">
+	<link rel="stylesheet" href="../../style_typeA.css" type="text/css">
+</head>
+<body bgcolor="#ffffff">
+<div id="main_wrap">
+<!-- print -->
+<!-- タイトル -->
+<table width="100%" border="1" cellpadding="0" cellspacing="0" id="TOP">
+<tr>
+	<td bgcolor="#047391">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td><font color="#FFFFFF"><img src="../../img/header_b_flow.gif" alt="" width="425" height="58" hspace="4" vspace="5"></font></td>
+			<td><div align="right"><img src="../../img/header_b_logo.gif" alt="" width="216" height="58" hspace="4" vspace="5"></div></td>
+		</tr>
+		</table>
+	</td>
+</tr>
+<tr>
+	<td bordercolor="#969696" bgcolor="#666666" class="head_title"><span class="head_subtitle02">プロジェクト名：<a href="main.html">ATRLNK010</a> ／ フロー名：Delete_Folders</span></td>
+</tr>
+</table>
+<!-- 概要 -->
+<table width="100%" border="0" cellpadding="2" cellspacing="0">
+<tr>
+	<td width="50"><img src="../../img/icon_flow.gif" alt="" width="26" height="23" hspace="10" vspace="10"></td>
+	<td class="title_base02">Delete_Foldersの説明</td>
+</tr>
+<tr>
+	<td colspan="2">ファイルを整理するプログラム<br>
+下記の指定項目によってファイルの削除もしくは移動が可能</td>
+</tr>
+</table>
+<!-- 画面 -->
+<p class="head_subtitle_02_02">● フロー画面</p>
+<p><img src="F7.jpeg" alt="Delete_Foldersのフロー画面" border="1" class="img-simple-list" usemap="#F7_map"></p>
+<map name="F7_map">
+			<area href="#F7C1" shape="rect" coords="16,16,52,52" alt="Start1"/>
+			<area href="#F7C2" shape="rect" coords="16,84,52,120" alt="Mapper1"/>
+			<area href="#F7C3" shape="rect" coords="16,152,52,188" alt="FileList1"/>
+			<area href="#F7C4" shape="rect" coords="16,220,52,256" alt="Mapper2"/>
+			<area href="#F7C5" shape="rect" coords="16,288,52,324" alt="BranchStart1"/>
+			<area href="#F7C6" shape="rect" coords="16,356,52,392" alt="MoveFile1"/>
+			<area href="#F7C7" shape="rect" coords="16,424,52,460" alt="BranchEnd1"/>
+			<area href="#F7C8" shape="rect" coords="16,492,52,528" alt="LoopEnd1"/>
+			<area href="#F7C9" shape="rect" coords="152,356,188,392" alt="DeleteFile1"/>
+			<area href="#F7C10" shape="rect" coords="16,560,52,596" alt="End1"/>
+	</map>
+<!-- 実行設定 -->
+<!-- 被参照検索 -->
+	<!-- プロパティ -->
+<p class="head_subtitle_02_02">● フロープロパティ</p>
+<table class="table-simple-list">
+<tr>
+	<th width="150">プロパティ名</th>
+	<th>設定値</th>
+</tr>
+<tr>
+  <td bgcolor="#EBEBEB">タイムアウト（秒）</td>
+  <td >
+                                          180
+            </td>
+</tr>
+<tr>
+  <td bgcolor="#EBEBEB">汎用エラー処理</td>
+  <td >
+                                                <a href="../../project/Flow_ProxyFlow_EAI_PJ2PPM_ATRLNK010/F6.html">Catch_Error</a>
+            </td>
+</tr>
+<tr>
+  <td bgcolor="#EBEBEB">実行を許可するユーザー</td>
+  <td >
+                                          pjnavi
+            </td>
+</tr>
+<tr>
+  <td bgcolor="#EBEBEB">アプリケーションログ設定</td>
+  <td >
+                                          &nbsp;
+            </td>
+</tr>
+<tr>
+  <td bgcolor="#EBEBEB">&nbsp;&nbsp;&nbsp;&nbsp;ログ設定名</td>
+  <td >
+                                          (なし)
+            </td>
+</tr>
+<tr>
+  <td bgcolor="#EBEBEB">&nbsp;&nbsp;&nbsp;&nbsp;ログレベル</td>
+  <td >
+                                          システム設定
+            </td>
+</tr>
+<tr>
+  <td bgcolor="#EBEBEB">&nbsp;&nbsp;&nbsp;&nbsp;システムログに出力</td>
+  <td >
+                                          はい
+            </td>
+</tr>
+<tr>
+  <td bgcolor="#EBEBEB">セッション</td>
+  <td >
+                                          終了時に閉じる
+            </td>
+</tr>
+<tr>
+  <td bgcolor="#EBEBEB">HTTPでの呼出しを許可</td>
+  <td >
+                                          いいえ
+            </td>
+</tr>
+</table>
+<!-- フロー変数 -->
+<p class="head_subtitle_02_02">● フロー変数</p>
+<table class="table-simple-list">
+	<tr>
+		<th>番号</th>
+		<th>変数名</th>
+		<th>型</th>
+		<th>属性</th>
+		<th>初期値</th>
+		<th>説明</th>
+		<th>参照</th>
+	</tr>
+				<tr>
+			<td bgcolor="#EBEBEB">1</td>
+			<td>limitDate</td>
+			<td>String</td>
+			<td>
+												&nbsp;
+			</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>
+																		<a href="#F7C2">Mapper1</a>
+																				<br>
+										<a href="#F7C3">FileList1</a>
+																</td>
+		</tr>
+					<tr>
+			<td bgcolor="#EBEBEB">2</td>
+			<td>filePatarn</td>
+			<td>String</td>
+			<td>
+												&nbsp;
+			</td>
+			<td>*</td>
+			<td>&nbsp;</td>
+			<td>
+																		<a href="#F7C3">FileList1</a>
+																</td>
+		</tr>
+					<tr>
+			<td bgcolor="#EBEBEB">3</td>
+			<td>Delete</td>
+			<td>Boolean</td>
+			<td>
+												&nbsp;
+			</td>
+			<td>true</td>
+			<td>&nbsp;</td>
+			<td>
+																		<a href="#F7C5">BranchStart1</a>
+																</td>
+		</tr>
+					<tr>
+			<td bgcolor="#EBEBEB">4</td>
+			<td>dir_from</td>
+			<td>String</td>
+			<td>
+												&nbsp;
+			</td>
+			<td>Data/Ftp/temp/ATRLNK010SE/arc/</td>
+			<td>&nbsp;</td>
+			<td>
+																		<a href="#F7C3">FileList1</a>
+																				<br>
+										<a href="#F7C6">MoveFile1</a>
+																				<br>
+										<a href="#F7C9">DeleteFile1</a>
+																</td>
+		</tr>
+					<tr>
+			<td bgcolor="#EBEBEB">5</td>
+			<td>fileName</td>
+			<td>String</td>
+			<td>
+												&nbsp;
+			</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>
+																		<a href="#F7C6">MoveFile1</a>
+																				<br>
+										<a href="#F7C6">MoveFile1</a>
+																				<br>
+										<a href="#F7C9">DeleteFile1</a>
+																				<br>
+										<a href="#F7C4">Mapper2</a>
+																</td>
+		</tr>
+					<tr>
+			<td bgcolor="#EBEBEB">6</td>
+			<td>SavePeriod</td>
+			<td>String</td>
+			<td>
+												&nbsp;
+			</td>
+			<td>90</td>
+			<td>&nbsp;</td>
+			<td>
+																		<a href="#F7C2">Mapper1</a>
+																</td>
+		</tr>
+			</table>
+<!-- コンポーネント一覧 -->
+<p class="head_subtitle_02_02">● コンポーネント一覧</p>
+<table class="table-simple-list">
+<tr>
+	<th>番号</th>
+	<th>コンポーネント名</th>
+	<th>種別</th>
+	<th>入力<br/>コンポーネント</th>
+	<th>出力<br/>コンポーネント</th>
+	<th>説明</th>
+	<th>ログ</th>
+</tr>
+	<tr>
+		<td bgcolor="#EBEBEB">1</td>
+		<td><a href="#F7C1">Start1</a></td>
+		<td>Start</td>
+		<td>
+													&nbsp;
+					</td>
+		<td>
+														<a href="#F7C2">Mapper1</a>
+												</td>
+		<td>&nbsp;</td>
+		<td>
+							&nbsp;
+					</td>
+	</tr>
+		<tr>
+		<td bgcolor="#EBEBEB">2</td>
+		<td><a href="#F7C2">Mapper1</a></td>
+		<td>Mapper</td>
+		<td>
+														<a href="#F7C1">Start1</a>
+												</td>
+		<td>
+														<a href="#F7C3">FileList1</a>
+												</td>
+		<td>保存期間のリミットの日付を作成<br>
+その他取得した値を変数に格納</td>
+		<td>
+							&nbsp;
+					</td>
+	</tr>
+		<tr>
+		<td bgcolor="#EBEBEB">3</td>
+		<td><a href="#F7C3">FileList1</a></td>
+		<td>FileList</td>
+		<td>
+														<a href="#F7C2">Mapper1</a>
+												</td>
+		<td>
+														<a href="#F7C4">Mapper2</a>
+												</td>
+		<td>＜ループ処理開始＞<br>
+対象ファイルをリストアップ<br>
+無ければフロー終了<br>
+</td>
+		<td>
+							&nbsp;
+					</td>
+	</tr>
+		<tr>
+		<td bgcolor="#EBEBEB">4</td>
+		<td><a href="#F7C4">Mapper2</a></td>
+		<td>Mapper</td>
+		<td>
+														<a href="#F7C3">FileList1</a>
+												</td>
+		<td>
+														<a href="#F7C5">BranchStart1</a>
+												</td>
+		<td>今回の対象ファイルを変数に格納</td>
+		<td>
+							&nbsp;
+					</td>
+	</tr>
+		<tr>
+		<td bgcolor="#EBEBEB">5</td>
+		<td><a href="#F7C5">BranchStart1</a></td>
+		<td>BranchStart</td>
+		<td>
+														<a href="#F7C4">Mapper2</a>
+												</td>
+		<td>
+														<a href="#F7C6">MoveFile1</a>
+																<br>
+								<a href="#F7C9">DeleteFile1</a>
+												</td>
+		<td>削除か移動かで分岐</td>
+		<td>
+							&nbsp;
+					</td>
+	</tr>
+		<tr>
+		<td bgcolor="#EBEBEB">6</td>
+		<td><a href="#F7C6">MoveFile1</a></td>
+		<td>MoveFile</td>
+		<td>
+														<a href="#F7C5">BranchStart1</a>
+												</td>
+		<td>
+														<a href="#F7C7">BranchEnd1</a>
+												</td>
+		<td>ファイルの移動</td>
+		<td>
+							&nbsp;
+					</td>
+	</tr>
+		<tr>
+		<td bgcolor="#EBEBEB">7</td>
+		<td><a href="#F7C7">BranchEnd1</a></td>
+		<td>BranchEnd</td>
+		<td>
+														<a href="#F7C6">MoveFile1</a>
+																<br>
+								<a href="#F7C9">DeleteFile1</a>
+												</td>
+		<td>
+														<a href="#F7C8">LoopEnd1</a>
+												</td>
+		<td>分岐終了</td>
+		<td>
+							&nbsp;
+					</td>
+	</tr>
+		<tr>
+		<td bgcolor="#EBEBEB">8</td>
+		<td><a href="#F7C8">LoopEnd1</a></td>
+		<td>LoopEnd</td>
+		<td>
+														<a href="#F7C7">BranchEnd1</a>
+												</td>
+		<td>
+														<a href="#F7C10">End1</a>
+												</td>
+		<td>＜ループ終了＞</td>
+		<td>
+							&nbsp;
+					</td>
+	</tr>
+		<tr>
+		<td bgcolor="#EBEBEB">9</td>
+		<td><a href="#F7C9">DeleteFile1</a></td>
+		<td>DeleteFile</td>
+		<td>
+														<a href="#F7C5">BranchStart1</a>
+												</td>
+		<td>
+														<a href="#F7C7">BranchEnd1</a>
+												</td>
+		<td>ファイルの削除</td>
+		<td>
+							&nbsp;
+					</td>
+	</tr>
+		<tr>
+		<td bgcolor="#EBEBEB">10</td>
+		<td><a href="#F7C10">End1</a></td>
+		<td>End</td>
+		<td>
+														<a href="#F7C8">LoopEnd1</a>
+												</td>
+		<td>
+													&nbsp;
+					</td>
+		<td>&nbsp;</td>
+		<td>
+							&nbsp;
+					</td>
+	</tr>
+	</table>
+<p class="pagetop"><a href="#TOP">↑ページTOPへ</a></p>
+<hr class="dot"/>
+<!-- コンポーネント詳細 -->
+<p class="head_subtitle_02_02">● 各コンポーネントの詳細</p>
+	<table width="100%" border="0" cellpadding="2" cellspacing="0">
+		<tr>
+			<td width="30" bgcolor="179dc1"><img src="../../img/tag_d.gif" alt="" width="18" height="19" hspace="10" vspace="5" id="Start1"></td>
+			<td bgcolor="#179dc1" class="title_base02"><span class="title_base_index02" id="F7C1">1. Start1コンポーネント</span></td>
+		</tr>
+		<tr>
+			<td colspan="2"><img src="../../img/clear.gif" alt="" width="15" height="15"></td>
+		</tr>
+	</table>
+	<table class="table-simple-list">
+		<tr>
+			<td width="10%" rowspan="5" class="v-center"><div align="center"><img src="../../icons/start.png" alt="Start" width="32" height="32"></div></td>
+			<th width="120">名前</th>
+			<td>Start1</td>
+		</tr>
+		<tr>
+			<th width="120">種別</th>
+			<td>Start</td>
+		</tr>
+		<tr>
+			<th width="120">入力コンポーネント</th>
+			<td>
+																	&nbsp;
+							</td>
+		</tr>
+		<tr>
+			<th width="120">出力コンポーネント</th>
+			<td>
+																		<a href="#F7C2">Mapper1</a>
+																</td>
+		</tr>
+		<tr>
+			<th width="120">説明</th>
+			<td>&nbsp;</td>
+		</tr>
+	</table>
+	<!-- コンポーネントプロパティ -->
+	<p class="title_flow_component_subtitle02">■ コンポーネントプロパティ</p>
+	<table class="table-simple-list">
+		<tr>
+			<th width="150">プロパティ名</th>
+			<th>設定値</th>
+		</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">汎用</td>
+  <td >
+                                                &nbsp;
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">トランザクション化</td>
+  <td >
+                                          いいえ
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">チェックポイントを使用</td>
+  <td >
+                                          いいえ
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">実行権限名</td>
+  <td >
+                                          &nbsp;
+            </td>
+</tr>
+			</table>
+	<!-- カテゴリープロパティ -->
+		<!-- ストリーム情報 -->
+			<p class="title_flow_component_subtitle02">■ ストリーム情報(Output)</p>
+		<table class="table-simple-list">
+												<tr>
+			<th class="proTitle" colSpan="2">プロパティ</th>
+			</tr>
+			<tr>
+				<th width="150">プロパティ名</th>
+				<th colSpan="1">設定値</th>
+			</tr>
+							<tr>
+  <td bgcolor="#EBEBEB">ストリーム型</td>
+  <td colspan='1'>
+                                          Any
+            </td>
+</tr>
+								</table>
+		<!-- ログ情報 -->
+		<!-- Mapperの場合 -->
+		<p class="pagetop"><a href="#TOP">↑ページTOPへ</a></p>
+		<table width="100%" border="0" cellpadding="2" cellspacing="0">
+		<tr>
+			<td width="30" bgcolor="179dc1"><img src="../../img/tag_d.gif" alt="" width="18" height="19" hspace="10" vspace="5" id="Mapper1"></td>
+			<td bgcolor="#179dc1" class="title_base02"><span class="title_base_index02" id="F7C2">2. Mapper1コンポーネント</span></td>
+		</tr>
+		<tr>
+			<td colspan="2"><img src="../../img/clear.gif" alt="" width="15" height="15"></td>
+		</tr>
+	</table>
+	<table class="table-simple-list">
+		<tr>
+			<td width="10%" rowspan="5" class="v-center"><div align="center"><img src="../../icons/mapping.png" alt="Mapper" width="32" height="32"></div></td>
+			<th width="120">名前</th>
+			<td>Mapper1</td>
+		</tr>
+		<tr>
+			<th width="120">種別</th>
+			<td>Mapper</td>
+		</tr>
+		<tr>
+			<th width="120">入力コンポーネント</th>
+			<td>
+																		<a href="#F7C1">Start1</a>
+																</td>
+		</tr>
+		<tr>
+			<th width="120">出力コンポーネント</th>
+			<td>
+																		<a href="#F7C3">FileList1</a>
+																</td>
+		</tr>
+		<tr>
+			<th width="120">説明</th>
+			<td>保存期間のリミットの日付を作成<br>
+その他取得した値を変数に格納</td>
+		</tr>
+	</table>
+	<!-- コンポーネントプロパティ -->
+	<p class="title_flow_component_subtitle02">■ コンポーネントプロパティ</p>
+	<table class="table-simple-list">
+		<tr>
+			<th width="150">プロパティ名</th>
+			<th>設定値</th>
+		</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">汎用</td>
+  <td >
+                                                &nbsp;
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">ループを開始</td>
+  <td >
+                                          いいえ
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">入力をそのまま出力</td>
+  <td >
+                                          いいえ
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">入力が無い場合エラー</td>
+  <td >
+                                          いいえ
+            </td>
+</tr>
+			</table>
+	<!-- カテゴリープロパティ -->
+					<!-- ストリーム情報 -->
+			<p class="title_flow_component_subtitle02">■ ストリーム情報(Output)</p>
+		<table class="table-simple-list">
+												<tr>
+			<th class="proTitle" colSpan="2">プロパティ</th>
+			</tr>
+			<tr>
+				<th width="150">プロパティ名</th>
+				<th colSpan="1">設定値</th>
+			</tr>
+							<tr>
+  <td bgcolor="#EBEBEB">ストリーム型</td>
+  <td colspan='1'>
+                                          Text
+            </td>
+</tr>
+							<tr>
+  <td bgcolor="#EBEBEB">出力エンコーディング</td>
+  <td colspan='1'>
+                                          utf-8
+            </td>
+</tr>
+								</table>
+		<!-- ログ情報 -->
+		<!-- Mapperの場合 -->
+						<p class="title_flow_component_subtitle02">
+				■ Mapper1マッピング定義　(レイヤー1）
+			</p>
+						<table width="80%" border="1" cellpadding="20" cellspacing="0" bordercolor="#31abb9" bgcolor="#DFF8FF" class="table-simple-list">
+				<tr>
+					<td>
+						<!-- 画面 -->
+						<p class="title_flow_component_subtitle">&nbsp;</p>
+						<img src="F7C2_1.jpeg" usemap="#F7C2_1_map" alt="Mapper1のレイヤー「レイヤー1」の画面" vspace="15" border="1" class="img-simple-list">
+						<map name="F7C2_1_map">
+															<area href="#F7C2M1" shape="rect" coords="173,16,209,52" alt="Now1"/>
+															<area href="#F7C2M2" shape="rect" coords="275,50,311,86" alt="DateCalc1"/>
+															<area href="#F7C2M3" shape="rect" coords="139,186,175,222" alt="Const1"/>
+															<area href="#F7C2M4" shape="rect" coords="207,84,243,120" alt="Concatenate1"/>
+													</map>
+						<!-- 関数一覧 -->
+													<table class="table-simple-list">
+								<caption>● Mapper関数一覧</caption>
+								<tr>
+									<th width="5%" nowrap>番号</th>
+									<th colspan="3">関数名</th>
+								</tr>
+																									<tr>
+										<td width="5%" rowspan="4" nowrap bgcolor="#EDEDED">1</td>
+										<td width="15%" rowspan="4" nowrap bgcolor="#FFFFFF"><a href="#F7C2M1">Now1</a></td>
+										<td width="10%" nowrap bgcolor="#EBEBEB">種別</td>
+										<td bgcolor="#FFFFFF">Now</td>
+									</tr>
+									<tr>
+										<td width="10%" nowrap bgcolor="#EDEDED">入力</td>
+										<td bgcolor="#FFFFFF">
+																																</td>
+									</tr>
+									<tr>
+										<td width="10%" nowrap bgcolor="#EDEDED">出力</td>
+										<td bgcolor="#FFFFFF">
+																																																											<a href="#F7C2M2">DateCalc1</a>
+																																	</td>
+									</tr>
+									<tr>
+										<td width="10%" nowrap bgcolor="#EDEDED">説明</td>
+										<td bgcolor="#FFFFFF">&nbsp;</td>
+									</tr>
+																										<tr>
+										<td width="5%" rowspan="4" nowrap bgcolor="#EDEDED">2</td>
+										<td width="15%" rowspan="4" nowrap bgcolor="#FFFFFF"><a href="#F7C2M2">DateCalc1</a></td>
+										<td width="10%" nowrap bgcolor="#EBEBEB">種別</td>
+										<td bgcolor="#FFFFFF">DateCalc</td>
+									</tr>
+									<tr>
+										<td width="10%" nowrap bgcolor="#EDEDED">入力</td>
+										<td bgcolor="#FFFFFF">
+																																																											<a href="#F7C2M1">Now1</a>
+																																																<br>
+																																					<a href="#F7C2M4">Concatenate1</a>
+																																	</td>
+									</tr>
+									<tr>
+										<td width="10%" nowrap bgcolor="#EDEDED">出力</td>
+										<td bgcolor="#FFFFFF">
+																																																											フロー変数/limitDate
+																																	</td>
+									</tr>
+									<tr>
+										<td width="10%" nowrap bgcolor="#EDEDED">説明</td>
+										<td bgcolor="#FFFFFF">&nbsp;</td>
+									</tr>
+																										<tr>
+										<td width="5%" rowspan="4" nowrap bgcolor="#EDEDED">3</td>
+										<td width="15%" rowspan="4" nowrap bgcolor="#FFFFFF"><a href="#F7C2M3">Const1</a></td>
+										<td width="10%" nowrap bgcolor="#EBEBEB">種別</td>
+										<td bgcolor="#FFFFFF">Const</td>
+									</tr>
+									<tr>
+										<td width="10%" nowrap bgcolor="#EDEDED">入力</td>
+										<td bgcolor="#FFFFFF">
+																																</td>
+									</tr>
+									<tr>
+										<td width="10%" nowrap bgcolor="#EDEDED">出力</td>
+										<td bgcolor="#FFFFFF">
+																																																											<a href="#F7C2M4">Concatenate1</a>
+																																	</td>
+									</tr>
+									<tr>
+										<td width="10%" nowrap bgcolor="#EDEDED">説明</td>
+										<td bgcolor="#FFFFFF">-</td>
+									</tr>
+																										<tr>
+										<td width="5%" rowspan="4" nowrap bgcolor="#EDEDED">4</td>
+										<td width="15%" rowspan="4" nowrap bgcolor="#FFFFFF"><a href="#F7C2M4">Concatenate1</a></td>
+										<td width="10%" nowrap bgcolor="#EBEBEB">種別</td>
+										<td bgcolor="#FFFFFF">Concatenate</td>
+									</tr>
+									<tr>
+										<td width="10%" nowrap bgcolor="#EDEDED">入力</td>
+										<td bgcolor="#FFFFFF">
+																																																											<a href="#F7C2M3">Const1</a>
+																																																<br>
+																																					フロー変数/SavePeriod
+																																	</td>
+									</tr>
+									<tr>
+										<td width="10%" nowrap bgcolor="#EDEDED">出力</td>
+										<td bgcolor="#FFFFFF">
+																																																											<a href="#F7C2M2">DateCalc1</a>
+																																	</td>
+									</tr>
+									<tr>
+										<td width="10%" nowrap bgcolor="#EDEDED">説明</td>
+										<td bgcolor="#FFFFFF">&nbsp;</td>
+									</tr>
+																								</table>
+												<!-- 関数詳細 -->
+																			<p class="title_flow_mappler_title" id="F7C2M1">1. Now1関数</p>
+							<table class="table-simple-list">
+								<tr>
+									<td width="10%" rowspan="4" bgcolor="#FFFFFF" class="v-center"><div align="center"><img src="../../icons/date_now.png" alt="Now" id="Mapper1-Now1" width="32" height="32"></div></td>
+									<th width="120">名前</th>
+									<td bgcolor="#FFFFFF">Now1</td>
+								</tr>
+								<tr>
+									<th width="120">種別</th>
+									<td bgcolor="#FFFFFF">Now</td>
+								</tr>
+								<tr>
+									<th width="120">説明</th>
+									<td bgcolor="#FFFFFF">&nbsp;</td>
+								</tr>
+																									<tr>
+										<th width="120">出力1</th>
+										<td bgcolor="#FFFFFF">
+																							<a href="#F7C2M2">DateCalc1</a>
+																					</td>
+									</tr>
+																								</table>
+							<p class="title_flow_mappler_pp">▼ 関数プロパティ</p>
+							<table class="table-simple-list">
+								<tr>
+									<th width="150">プロパティ名</th>
+									<th>設定値</th>
+								</tr>
+																	<tr>
+  <td bgcolor="#EBEBEB">日付フォーマット</td>
+  <td bgcolor='#FFFFFF'>
+                                          DateTime型
+            </td>
+</tr>
+																	<tr>
+  <td bgcolor="#EBEBEB">時刻を設定しない</td>
+  <td bgcolor='#FFFFFF'>
+                                          いいえ
+            </td>
+</tr>
+															</table>
+																				<p class="title_flow_mappler_title" id="F7C2M2">2. DateCalc1関数</p>
+							<table class="table-simple-list">
+								<tr>
+									<td width="10%" rowspan="6" bgcolor="#FFFFFF" class="v-center"><div align="center"><img src="../../icons/formatdatecalc.png" alt="DateCalc" id="Mapper1-DateCalc1" width="32" height="32"></div></td>
+									<th width="120">名前</th>
+									<td bgcolor="#FFFFFF">DateCalc1</td>
+								</tr>
+								<tr>
+									<th width="120">種別</th>
+									<td bgcolor="#FFFFFF">DateCalc</td>
+								</tr>
+								<tr>
+									<th width="120">説明</th>
+									<td bgcolor="#FFFFFF">&nbsp;</td>
+								</tr>
+																	<tr>
+										<th width="120">入力1</th>
+										<td bgcolor="#FFFFFF">
+																																		<a href="#F7C2M1">Now1</a>
+																					</td>
+									</tr>
+																	<tr>
+										<th width="120">入力2</th>
+										<td bgcolor="#FFFFFF">
+																																		<a href="#F7C2M4">Concatenate1</a>
+																					</td>
+									</tr>
+																									<tr>
+										<th width="120">出力1</th>
+										<td bgcolor="#FFFFFF">
+																							フロー変数/limitDate
+																					</td>
+									</tr>
+																								</table>
+							<p class="title_flow_mappler_pp">▼ 関数プロパティ</p>
+							<table class="table-simple-list">
+								<tr>
+									<th width="150">プロパティ名</th>
+									<th>設定値</th>
+								</tr>
+																	<tr>
+  <td bgcolor="#EBEBEB">計算対象</td>
+  <td bgcolor='#FFFFFF'>
+                                          日
+            </td>
+</tr>
+																	<tr>
+  <td bgcolor="#EBEBEB">加算する値</td>
+  <td bgcolor='#FFFFFF'>
+                                          0
+            </td>
+</tr>
+																	<tr>
+  <td bgcolor="#EBEBEB">休日時の処理</td>
+  <td bgcolor='#FFFFFF'>
+                                          何もしない
+            </td>
+</tr>
+																	<tr>
+  <td bgcolor="#EBEBEB">休日設定</td>
+  <td bgcolor='#FFFFFF'>
+                                          (なし)
+            </td>
+</tr>
+															</table>
+																				<p class="title_flow_mappler_title" id="F7C2M3">3. Const1関数</p>
+							<table class="table-simple-list">
+								<tr>
+									<td width="10%" rowspan="4" bgcolor="#FFFFFF" class="v-center"><div align="center"><img src="../../icons/str_const.png" alt="Const" id="Mapper1-Const1" width="32" height="32"></div></td>
+									<th width="120">名前</th>
+									<td bgcolor="#FFFFFF">Const1</td>
+								</tr>
+								<tr>
+									<th width="120">種別</th>
+									<td bgcolor="#FFFFFF">Const</td>
+								</tr>
+								<tr>
+									<th width="120">説明</th>
+									<td bgcolor="#FFFFFF">-</td>
+								</tr>
+																									<tr>
+										<th width="120">出力1</th>
+										<td bgcolor="#FFFFFF">
+																							<a href="#F7C2M4">Concatenate1</a>
+																					</td>
+									</tr>
+																								</table>
+							<p class="title_flow_mappler_pp">▼ 関数プロパティ</p>
+							<table class="table-simple-list">
+								<tr>
+									<th width="150">プロパティ名</th>
+									<th>設定値</th>
+								</tr>
+																	<tr>
+  <td bgcolor="#EBEBEB">データ</td>
+  <td bgcolor='#FFFFFF'>
+                                          -
+            </td>
+</tr>
+																	<tr>
+  <td bgcolor="#EBEBEB">データ型</td>
+  <td bgcolor='#FFFFFF'>
+                                          String
+            </td>
+</tr>
+																	<tr>
+  <td bgcolor="#EBEBEB">メタ文字を使用</td>
+  <td bgcolor='#FFFFFF'>
+                                          いいえ
+            </td>
+</tr>
+															</table>
+																				<p class="title_flow_mappler_title" id="F7C2M4">4. Concatenate1関数</p>
+							<table class="table-simple-list">
+								<tr>
+									<td width="10%" rowspan="6" bgcolor="#FFFFFF" class="v-center"><div align="center"><img src="../../icons/str_concatnate.png" alt="Concatenate" id="Mapper1-Concatenate1" width="32" height="32"></div></td>
+									<th width="120">名前</th>
+									<td bgcolor="#FFFFFF">Concatenate1</td>
+								</tr>
+								<tr>
+									<th width="120">種別</th>
+									<td bgcolor="#FFFFFF">Concatenate</td>
+								</tr>
+								<tr>
+									<th width="120">説明</th>
+									<td bgcolor="#FFFFFF">&nbsp;</td>
+								</tr>
+																	<tr>
+										<th width="120">入力1</th>
+										<td bgcolor="#FFFFFF">
+																																		<a href="#F7C2M3">Const1</a>
+																					</td>
+									</tr>
+																	<tr>
+										<th width="120">入力2</th>
+										<td bgcolor="#FFFFFF">
+																																		フロー変数/SavePeriod
+																					</td>
+									</tr>
+																									<tr>
+										<th width="120">出力1</th>
+										<td bgcolor="#FFFFFF">
+																							<a href="#F7C2M2">DateCalc1</a>
+																					</td>
+									</tr>
+																								</table>
+							<p class="title_flow_mappler_pp">▼ 関数プロパティ</p>
+							<table class="table-simple-list">
+								<tr>
+									<th width="150">プロパティ名</th>
+									<th>設定値</th>
+								</tr>
+																	<tr>
+  <td bgcolor="#EBEBEB">区切り文字</td>
+  <td bgcolor='#FFFFFF'>
+                                          &nbsp;
+            </td>
+</tr>
+																	<tr>
+  <td bgcolor="#EBEBEB">区切り文字にメタ文字を使用</td>
+  <td bgcolor='#FFFFFF'>
+                                          いいえ
+            </td>
+</tr>
+																	<tr>
+  <td bgcolor="#EBEBEB">入力が空の場合</td>
+  <td bgcolor='#FFFFFF'>
+                                          区切り文字を出力する
+            </td>
+</tr>
+															</table>
+																		</td>
+				</tr>
+			</table>
+				<p class="pagetop"><a href="#TOP">↑ページTOPへ</a></p>
+		<table width="100%" border="0" cellpadding="2" cellspacing="0">
+		<tr>
+			<td width="30" bgcolor="179dc1"><img src="../../img/tag_d.gif" alt="" width="18" height="19" hspace="10" vspace="5" id="FileList1"></td>
+			<td bgcolor="#179dc1" class="title_base02"><span class="title_base_index02" id="F7C3">3. FileList1コンポーネント</span></td>
+		</tr>
+		<tr>
+			<td colspan="2"><img src="../../img/clear.gif" alt="" width="15" height="15"></td>
+		</tr>
+	</table>
+	<table class="table-simple-list">
+		<tr>
+			<td width="10%" rowspan="5" class="v-center"><div align="center"><img src="../../icons/file_dir.png" alt="FileList" width="32" height="32"></div></td>
+			<th width="120">名前</th>
+			<td>FileList1</td>
+		</tr>
+		<tr>
+			<th width="120">種別</th>
+			<td>FileList</td>
+		</tr>
+		<tr>
+			<th width="120">入力コンポーネント</th>
+			<td>
+																		<a href="#F7C2">Mapper1</a>
+																</td>
+		</tr>
+		<tr>
+			<th width="120">出力コンポーネント</th>
+			<td>
+																		<a href="#F7C4">Mapper2</a>
+																</td>
+		</tr>
+		<tr>
+			<th width="120">説明</th>
+			<td>＜ループ処理開始＞<br>
+対象ファイルをリストアップ<br>
+無ければフロー終了<br>
+</td>
+		</tr>
+	</table>
+	<!-- コンポーネントプロパティ -->
+	<p class="title_flow_component_subtitle02">■ コンポーネントプロパティ</p>
+	<table class="table-simple-list">
+		<tr>
+			<th width="150">プロパティ名</th>
+			<th>設定値</th>
+		</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">汎用</td>
+  <td >
+                                                &nbsp;
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">フォルダーが存在しない</td>
+  <td >
+                                                <a href="../../project/Flow_ProxyFlow_EAI_PJ2PPM_ATRLNK010/F6.html">Catch_Error</a>
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">ファイルが存在しない</td>
+  <td >
+                                                <a href="../../project/Flow_ProxyFlow_EAI_PJ2PPM_ATRLNK010/F4.html">Catch_Success</a>
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">ファイル名のパターン</td>
+  <td >
+          <i>${flow.filePatarn}</i>
+      </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">対象フォルダー</td>
+  <td >
+          <i>${flow.dir_from}</i>
+      </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">対象フォルダーの詳細設定</td>
+  <td >
+                                          &nbsp;
+            </td>
+</tr>
+<tr>
+  <td bgcolor="#EBEBEB">&nbsp;&nbsp;&nbsp;&nbsp;相対パスの起点</td>
+  <td >
+                                          ホームフォルダー
+            </td>
+</tr>
+<tr>
+  <td bgcolor="#EBEBEB">&nbsp;&nbsp;&nbsp;&nbsp;絶対パスを許可</td>
+  <td >
+                                          はい
+            </td>
+</tr>
+<tr>
+  <td bgcolor="#EBEBEB">&nbsp;&nbsp;&nbsp;&nbsp;「..」を許可</td>
+  <td >
+                                          はい
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">種別</td>
+  <td >
+                                          ファイルとフォルダー
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">対象更新日時</td>
+  <td >
+                                          &nbsp;
+            </td>
+</tr>
+<tr>
+  <td bgcolor="#EBEBEB">&nbsp;&nbsp;&nbsp;&nbsp;これ以前</td>
+  <td >
+          <i>${flow.limitDate}</i>
+      </td>
+</tr>
+<tr>
+  <td bgcolor="#EBEBEB">&nbsp;&nbsp;&nbsp;&nbsp;これ以後</td>
+  <td >
+                                          &nbsp;
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">ソート順</td>
+  <td >
+                                          ファイルパス(昇順)
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">ループを開始</td>
+  <td >
+                                          はい
+            </td>
+</tr>
+			</table>
+	<!-- カテゴリープロパティ -->
+		<!-- ストリーム情報 -->
+		<!-- ログ情報 -->
+		<!-- Mapperの場合 -->
+		<p class="pagetop"><a href="#TOP">↑ページTOPへ</a></p>
+		<table width="100%" border="0" cellpadding="2" cellspacing="0">
+		<tr>
+			<td width="30" bgcolor="179dc1"><img src="../../img/tag_d.gif" alt="" width="18" height="19" hspace="10" vspace="5" id="Mapper2"></td>
+			<td bgcolor="#179dc1" class="title_base02"><span class="title_base_index02" id="F7C4">4. Mapper2コンポーネント</span></td>
+		</tr>
+		<tr>
+			<td colspan="2"><img src="../../img/clear.gif" alt="" width="15" height="15"></td>
+		</tr>
+	</table>
+	<table class="table-simple-list">
+		<tr>
+			<td width="10%" rowspan="5" class="v-center"><div align="center"><img src="../../icons/mapping.png" alt="Mapper" width="32" height="32"></div></td>
+			<th width="120">名前</th>
+			<td>Mapper2</td>
+		</tr>
+		<tr>
+			<th width="120">種別</th>
+			<td>Mapper</td>
+		</tr>
+		<tr>
+			<th width="120">入力コンポーネント</th>
+			<td>
+																		<a href="#F7C3">FileList1</a>
+																</td>
+		</tr>
+		<tr>
+			<th width="120">出力コンポーネント</th>
+			<td>
+																		<a href="#F7C5">BranchStart1</a>
+																</td>
+		</tr>
+		<tr>
+			<th width="120">説明</th>
+			<td>今回の対象ファイルを変数に格納</td>
+		</tr>
+	</table>
+	<!-- コンポーネントプロパティ -->
+	<p class="title_flow_component_subtitle02">■ コンポーネントプロパティ</p>
+	<table class="table-simple-list">
+		<tr>
+			<th width="150">プロパティ名</th>
+			<th>設定値</th>
+		</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">汎用</td>
+  <td >
+                                                &nbsp;
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">ループを開始</td>
+  <td >
+                                          いいえ
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">入力をそのまま出力</td>
+  <td >
+                                          いいえ
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">入力が無い場合エラー</td>
+  <td >
+                                          いいえ
+            </td>
+</tr>
+			</table>
+	<!-- カテゴリープロパティ -->
+					<!-- ストリーム情報 -->
+			<p class="title_flow_component_subtitle02">■ ストリーム情報(Output)</p>
+		<table class="table-simple-list">
+												<tr>
+			<th class="proTitle" colSpan="2">プロパティ</th>
+			</tr>
+			<tr>
+				<th width="150">プロパティ名</th>
+				<th colSpan="1">設定値</th>
+			</tr>
+							<tr>
+  <td bgcolor="#EBEBEB">ストリーム型</td>
+  <td colspan='1'>
+                                          Text
+            </td>
+</tr>
+							<tr>
+  <td bgcolor="#EBEBEB">出力エンコーディング</td>
+  <td colspan='1'>
+                                          utf-8
+            </td>
+</tr>
+								</table>
+		<!-- ログ情報 -->
+		<!-- Mapperの場合 -->
+						<p class="title_flow_component_subtitle02">
+				■ Mapper2マッピング定義　(レイヤー1）
+			</p>
+						<table width="80%" border="1" cellpadding="20" cellspacing="0" bordercolor="#31abb9" bgcolor="#DFF8FF" class="table-simple-list">
+				<tr>
+					<td>
+						<!-- 画面 -->
+						<p class="title_flow_component_subtitle">&nbsp;</p>
+						<img src="F7C4_1.jpeg" usemap="#F7C4_1_map" alt="Mapper2のレイヤー「レイヤー1」の画面" vspace="15" border="1" class="img-simple-list">
+						<map name="F7C4_1_map">
+													</map>
+						<!-- 関数一覧 -->
+												<!-- 関数詳細 -->
+																	</td>
+				</tr>
+			</table>
+				<p class="pagetop"><a href="#TOP">↑ページTOPへ</a></p>
+		<table width="100%" border="0" cellpadding="2" cellspacing="0">
+		<tr>
+			<td width="30" bgcolor="179dc1"><img src="../../img/tag_d.gif" alt="" width="18" height="19" hspace="10" vspace="5" id="BranchStart1"></td>
+			<td bgcolor="#179dc1" class="title_base02"><span class="title_base_index02" id="F7C5">5. BranchStart1コンポーネント</span></td>
+		</tr>
+		<tr>
+			<td colspan="2"><img src="../../img/clear.gif" alt="" width="15" height="15"></td>
+		</tr>
+	</table>
+	<table class="table-simple-list">
+		<tr>
+			<td width="10%" rowspan="5" class="v-center"><div align="center"><img src="../../icons/branch_start.png" alt="BranchStart" width="32" height="32"></div></td>
+			<th width="120">名前</th>
+			<td>BranchStart1</td>
+		</tr>
+		<tr>
+			<th width="120">種別</th>
+			<td>BranchStart</td>
+		</tr>
+		<tr>
+			<th width="120">入力コンポーネント</th>
+			<td>
+																		<a href="#F7C4">Mapper2</a>
+																</td>
+		</tr>
+		<tr>
+			<th width="120">出力コンポーネント</th>
+			<td>
+																		<a href="#F7C6">MoveFile1</a>
+																				<br>
+										<a href="#F7C9">DeleteFile1</a>
+																</td>
+		</tr>
+		<tr>
+			<th width="120">説明</th>
+			<td>削除か移動かで分岐</td>
+		</tr>
+	</table>
+	<!-- コンポーネントプロパティ -->
+	<p class="title_flow_component_subtitle02">■ コンポーネントプロパティ</p>
+	<table class="table-simple-list">
+		<tr>
+			<th width="150">プロパティ名</th>
+			<th>設定値</th>
+		</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">汎用</td>
+  <td >
+                                                &nbsp;
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">条件式</td>
+  <td >
+                                          $flow.Delete = true
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">判定方法</td>
+  <td >
+                                          1つ以上一致
+            </td>
+</tr>
+			</table>
+	<!-- カテゴリープロパティ -->
+		<!-- ストリーム情報 -->
+		<!-- ログ情報 -->
+		<!-- Mapperの場合 -->
+		<p class="pagetop"><a href="#TOP">↑ページTOPへ</a></p>
+		<table width="100%" border="0" cellpadding="2" cellspacing="0">
+		<tr>
+			<td width="30" bgcolor="179dc1"><img src="../../img/tag_d.gif" alt="" width="18" height="19" hspace="10" vspace="5" id="MoveFile1"></td>
+			<td bgcolor="#179dc1" class="title_base02"><span class="title_base_index02" id="F7C6">6. MoveFile1コンポーネント</span></td>
+		</tr>
+		<tr>
+			<td colspan="2"><img src="../../img/clear.gif" alt="" width="15" height="15"></td>
+		</tr>
+	</table>
+	<table class="table-simple-list">
+		<tr>
+			<td width="10%" rowspan="5" class="v-center"><div align="center"><img src="../../icons/FileMoveComponent.png" alt="MoveFile" width="32" height="32"></div></td>
+			<th width="120">名前</th>
+			<td>MoveFile1</td>
+		</tr>
+		<tr>
+			<th width="120">種別</th>
+			<td>MoveFile</td>
+		</tr>
+		<tr>
+			<th width="120">入力コンポーネント</th>
+			<td>
+																		<a href="#F7C5">BranchStart1</a>
+																</td>
+		</tr>
+		<tr>
+			<th width="120">出力コンポーネント</th>
+			<td>
+																		<a href="#F7C7">BranchEnd1</a>
+																</td>
+		</tr>
+		<tr>
+			<th width="120">説明</th>
+			<td>ファイルの移動</td>
+		</tr>
+	</table>
+	<!-- コンポーネントプロパティ -->
+	<p class="title_flow_component_subtitle02">■ コンポーネントプロパティ</p>
+	<table class="table-simple-list">
+		<tr>
+			<th width="150">プロパティ名</th>
+			<th>設定値</th>
+		</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">汎用</td>
+  <td >
+                                                &nbsp;
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">ファイルが存在しない</td>
+  <td >
+                                                &nbsp;
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">移動元ファイルパス</td>
+  <td >
+          <i>${flow.dir_from}${flow.fileName}</i>
+      </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">移動先ファイルパス</td>
+  <td >
+          <i>${flow.dir_to}${flow.fileName}</i>
+      </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">ファイルパスの詳細設定</td>
+  <td >
+                                          &nbsp;
+            </td>
+</tr>
+<tr>
+  <td bgcolor="#EBEBEB">&nbsp;&nbsp;&nbsp;&nbsp;相対パスの起点</td>
+  <td >
+                                          プロジェクトフォルダ
+            </td>
+</tr>
+<tr>
+  <td bgcolor="#EBEBEB">&nbsp;&nbsp;&nbsp;&nbsp;絶対パスを許可</td>
+  <td >
+                                          はい
+            </td>
+</tr>
+<tr>
+  <td bgcolor="#EBEBEB">&nbsp;&nbsp;&nbsp;&nbsp;「..」を許可</td>
+  <td >
+                                          はい
+            </td>
+</tr>
+			</table>
+	<!-- カテゴリープロパティ -->
+		<!-- ストリーム情報 -->
+		<!-- ログ情報 -->
+		<!-- Mapperの場合 -->
+		<p class="pagetop"><a href="#TOP">↑ページTOPへ</a></p>
+		<table width="100%" border="0" cellpadding="2" cellspacing="0">
+		<tr>
+			<td width="30" bgcolor="179dc1"><img src="../../img/tag_d.gif" alt="" width="18" height="19" hspace="10" vspace="5" id="BranchEnd1"></td>
+			<td bgcolor="#179dc1" class="title_base02"><span class="title_base_index02" id="F7C7">7. BranchEnd1コンポーネント</span></td>
+		</tr>
+		<tr>
+			<td colspan="2"><img src="../../img/clear.gif" alt="" width="15" height="15"></td>
+		</tr>
+	</table>
+	<table class="table-simple-list">
+		<tr>
+			<td width="10%" rowspan="5" class="v-center"><div align="center"><img src="../../icons/branch_end.png" alt="BranchEnd" width="32" height="32"></div></td>
+			<th width="120">名前</th>
+			<td>BranchEnd1</td>
+		</tr>
+		<tr>
+			<th width="120">種別</th>
+			<td>BranchEnd</td>
+		</tr>
+		<tr>
+			<th width="120">入力コンポーネント</th>
+			<td>
+																		<a href="#F7C6">MoveFile1</a>
+																				<br>
+										<a href="#F7C9">DeleteFile1</a>
+																</td>
+		</tr>
+		<tr>
+			<th width="120">出力コンポーネント</th>
+			<td>
+																		<a href="#F7C8">LoopEnd1</a>
+																</td>
+		</tr>
+		<tr>
+			<th width="120">説明</th>
+			<td>分岐終了</td>
+		</tr>
+	</table>
+	<!-- コンポーネントプロパティ -->
+	<p class="title_flow_component_subtitle02">■ コンポーネントプロパティ</p>
+	<table class="table-simple-list">
+		<tr>
+			<th width="150">プロパティ名</th>
+			<th>設定値</th>
+		</tr>
+			</table>
+	<!-- カテゴリープロパティ -->
+		<!-- ストリーム情報 -->
+		<!-- ログ情報 -->
+		<!-- Mapperの場合 -->
+		<p class="pagetop"><a href="#TOP">↑ページTOPへ</a></p>
+		<table width="100%" border="0" cellpadding="2" cellspacing="0">
+		<tr>
+			<td width="30" bgcolor="179dc1"><img src="../../img/tag_d.gif" alt="" width="18" height="19" hspace="10" vspace="5" id="LoopEnd1"></td>
+			<td bgcolor="#179dc1" class="title_base02"><span class="title_base_index02" id="F7C8">8. LoopEnd1コンポーネント</span></td>
+		</tr>
+		<tr>
+			<td colspan="2"><img src="../../img/clear.gif" alt="" width="15" height="15"></td>
+		</tr>
+	</table>
+	<table class="table-simple-list">
+		<tr>
+			<td width="10%" rowspan="5" class="v-center"><div align="center"><img src="../../icons/LoopEnd.png" alt="LoopEnd" width="32" height="32"></div></td>
+			<th width="120">名前</th>
+			<td>LoopEnd1</td>
+		</tr>
+		<tr>
+			<th width="120">種別</th>
+			<td>LoopEnd</td>
+		</tr>
+		<tr>
+			<th width="120">入力コンポーネント</th>
+			<td>
+																		<a href="#F7C7">BranchEnd1</a>
+																</td>
+		</tr>
+		<tr>
+			<th width="120">出力コンポーネント</th>
+			<td>
+																		<a href="#F7C10">End1</a>
+																</td>
+		</tr>
+		<tr>
+			<th width="120">説明</th>
+			<td>＜ループ終了＞</td>
+		</tr>
+	</table>
+	<!-- コンポーネントプロパティ -->
+	<p class="title_flow_component_subtitle02">■ コンポーネントプロパティ</p>
+	<table class="table-simple-list">
+		<tr>
+			<th width="150">プロパティ名</th>
+			<th>設定値</th>
+		</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">ループ開始コンポーネント</td>
+  <td >
+                                          FileList1
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">出力形態</td>
+  <td >
+                                          ストリームをまとめる
+            </td>
+</tr>
+			</table>
+	<!-- カテゴリープロパティ -->
+		<!-- ストリーム情報 -->
+		<!-- ログ情報 -->
+		<!-- Mapperの場合 -->
+		<p class="pagetop"><a href="#TOP">↑ページTOPへ</a></p>
+		<table width="100%" border="0" cellpadding="2" cellspacing="0">
+		<tr>
+			<td width="30" bgcolor="179dc1"><img src="../../img/tag_d.gif" alt="" width="18" height="19" hspace="10" vspace="5" id="DeleteFile1"></td>
+			<td bgcolor="#179dc1" class="title_base02"><span class="title_base_index02" id="F7C9">9. DeleteFile1コンポーネント</span></td>
+		</tr>
+		<tr>
+			<td colspan="2"><img src="../../img/clear.gif" alt="" width="15" height="15"></td>
+		</tr>
+	</table>
+	<table class="table-simple-list">
+		<tr>
+			<td width="10%" rowspan="5" class="v-center"><div align="center"><img src="../../icons/FileDeleteComponent.png" alt="DeleteFile" width="32" height="32"></div></td>
+			<th width="120">名前</th>
+			<td>DeleteFile1</td>
+		</tr>
+		<tr>
+			<th width="120">種別</th>
+			<td>DeleteFile</td>
+		</tr>
+		<tr>
+			<th width="120">入力コンポーネント</th>
+			<td>
+																		<a href="#F7C5">BranchStart1</a>
+																</td>
+		</tr>
+		<tr>
+			<th width="120">出力コンポーネント</th>
+			<td>
+																		<a href="#F7C7">BranchEnd1</a>
+																</td>
+		</tr>
+		<tr>
+			<th width="120">説明</th>
+			<td>ファイルの削除</td>
+		</tr>
+	</table>
+	<!-- コンポーネントプロパティ -->
+	<p class="title_flow_component_subtitle02">■ コンポーネントプロパティ</p>
+	<table class="table-simple-list">
+		<tr>
+			<th width="150">プロパティ名</th>
+			<th>設定値</th>
+		</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">汎用</td>
+  <td >
+                                                &nbsp;
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">ファイルが存在しない</td>
+  <td >
+                                                &nbsp;
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">削除できない</td>
+  <td >
+                                                &nbsp;
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">ファイルパス</td>
+  <td >
+          <i>${flow.dir_from}${flow.fileName}</i>
+      </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">ファイルパスの詳細設定</td>
+  <td >
+                                          &nbsp;
+            </td>
+</tr>
+<tr>
+  <td bgcolor="#EBEBEB">&nbsp;&nbsp;&nbsp;&nbsp;相対パスの起点</td>
+  <td >
+                                          ホームフォルダー
+            </td>
+</tr>
+<tr>
+  <td bgcolor="#EBEBEB">&nbsp;&nbsp;&nbsp;&nbsp;絶対パスを許可</td>
+  <td >
+                                          いいえ
+            </td>
+</tr>
+<tr>
+  <td bgcolor="#EBEBEB">&nbsp;&nbsp;&nbsp;&nbsp;「..」を許可</td>
+  <td >
+                                          はい
+            </td>
+</tr>
+			</table>
+	<!-- カテゴリープロパティ -->
+		<!-- ストリーム情報 -->
+		<!-- ログ情報 -->
+		<!-- Mapperの場合 -->
+		<p class="pagetop"><a href="#TOP">↑ページTOPへ</a></p>
+		<table width="100%" border="0" cellpadding="2" cellspacing="0">
+		<tr>
+			<td width="30" bgcolor="179dc1"><img src="../../img/tag_d.gif" alt="" width="18" height="19" hspace="10" vspace="5" id="End1"></td>
+			<td bgcolor="#179dc1" class="title_base02"><span class="title_base_index02" id="F7C10">10. End1コンポーネント</span></td>
+		</tr>
+		<tr>
+			<td colspan="2"><img src="../../img/clear.gif" alt="" width="15" height="15"></td>
+		</tr>
+	</table>
+	<table class="table-simple-list">
+		<tr>
+			<td width="10%" rowspan="5" class="v-center"><div align="center"><img src="../../icons/end.png" alt="End" width="32" height="32"></div></td>
+			<th width="120">名前</th>
+			<td>End1</td>
+		</tr>
+		<tr>
+			<th width="120">種別</th>
+			<td>End</td>
+		</tr>
+		<tr>
+			<th width="120">入力コンポーネント</th>
+			<td>
+																		<a href="#F7C8">LoopEnd1</a>
+																</td>
+		</tr>
+		<tr>
+			<th width="120">出力コンポーネント</th>
+			<td>
+																	&nbsp;
+							</td>
+		</tr>
+		<tr>
+			<th width="120">説明</th>
+			<td>&nbsp;</td>
+		</tr>
+	</table>
+	<!-- コンポーネントプロパティ -->
+	<p class="title_flow_component_subtitle02">■ コンポーネントプロパティ</p>
+	<table class="table-simple-list">
+		<tr>
+			<th width="150">プロパティ名</th>
+			<th>設定値</th>
+		</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">トランザクション</td>
+  <td >
+                                          コミット
+            </td>
+</tr>
+					<tr>
+  <td bgcolor="#EBEBEB">戻り値</td>
+  <td >
+                                          0
+            </td>
+</tr>
+			</table>
+	<!-- カテゴリープロパティ -->
+		<!-- ストリーム情報 -->
+		<!-- ログ情報 -->
+		<!-- Mapperの場合 -->
+		<p class="pagetop"><a href="#TOP">↑ページTOPへ</a></p>
+	<p/>
+<!-- print -->
+</div>
+</body>
+</html>

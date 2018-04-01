@@ -1,0 +1,43 @@
+package jp.co.ctc_g.pjnavi.batch.pj.npj○○;
+
+import jp.co.ctc_g.pjnavi.cm.business.service.SYAUT00400.SYAUT00400Service;
+import jp.co.ctc_g.pjnavi.cm.business.service.SYAUT00400.CloseValidator;
+import jp.co.ctc_g.pjnavi.cm.business.domain.SYAUT00400.CloseValidationResult;
+import jp.co.ctc_g.pjnavi.fw.batch.job.AbstractPjnaviJob;
+import jp.co.ctc_g.pjnavi.fw.batch.job.JobParameter;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
+public class Jpj○○JobImpl extends AbstractPjnaviJob {
+    private Logger logger = LoggerFactory.getLogger(Jpj○○JobImpl.class);
+
+    // 残チェックの共通サービス
+    @Autowired
+    private SYAUT00400Service syaut00400Service;
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void doExecute(JobParameter param) {
+        // 残チェックのインスタンスを生成
+        CloseValidator validator = syaut00400Service.createValidator();
+
+        // 残チェックの設定
+        validator.initialize("PJ15A00001");
+        validator.setOperationApprovedValidationEnabled(true);
+        validator.setOperationInPeriodValidationEnabled(true);
+        validator.setProgressCompleteValidationEnabled(true);
+        validator.setShipAcceptedValidationEnabled(true);
+
+        // 残チェックを実行
+        CloseValidationResult result = validator.validate();
+
+        // アラートメール送信 ※スタブではアラートメール送信機能は何もしない
+        validator.sendAlert();
+    }
+}

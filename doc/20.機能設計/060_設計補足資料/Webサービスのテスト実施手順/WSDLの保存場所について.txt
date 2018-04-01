@@ -1,0 +1,3 @@
+Webサーバー側のWSDLはSVN上の下記フォルダに保存しています。
+http://pjnavi-dev.pjnavi.local/svn/pjnavi/branches/jikisys/src/asteria/Data/wsdl/external/pjnavi
+

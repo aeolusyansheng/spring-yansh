@@ -1,0 +1,102 @@
+瑕疵プロジェクト送受信問題における対応
+======================================
+
+前提
+----
+
+PJNaviでは瑕疵プロジェクトは元となるプロジェクトから派生して作成されるため、
+瑕疵プロジェクトのメンバを元となるプロジェクトのメンバとマージする必要がある。
+
+また、商品管理部において赤黒処理などの運用におけるクローズや瑕疵からの再オープンが存在する。
+
+
+問題点
+------
+
+1. PJNaviを正とした仕組みでの送受信であるため、NextMI側でのプロジェクトメンバマージは難易度が高い
+  (PJNavi側では出力SQLを修正するのみだが受信側でのマージは複数手順を要する)
+
+2. 退職している従業員のメンバ設定の新規追加、変更、削除はエラーとしているが、
+  瑕疵プロジェクト生成の際に退職従業員のメンバ設定をコピーしているため受信時にエラーとなる
+
+3. 瑕疵プロジェクト生成時に送信フラグが "0"(送信対象) になっているのであれば問題ないが、
+  なっていないのであればMI側に瑕疵期間のメンバ情報が送信されないためいつまでたっても実績登録が行えない可能性がある
+
+4. 赤黒処理などの運用におけるクローズや瑕疵からの再オープン時に受け入れ可能なプロジェクト情報の特定が困難
+  (このような運用は例外であるため)
+
+
+対応案
+------
+
+* 1 についてはPJNavi側で送信する際にメンバ情報をマージする(下記プロジェクトメンバ送信参考SQLを参照)
+
+* 2 については瑕疵プロジェクト生成時に退職している従業員のメンバ設定をコピーしないように修正する
+
+* 3 については必要に応じて瑕疵プロジェクト生成時に送信フラグを "0"(送信対象) に設定する
+
+* 4 については以下の通り
+  * 再オープンなど例外的な運用を示すステータスは連携しない (MIの送信機能で送信を抑制)
+  * 例外的な運用におけるPJNavi情報の変更が必要な際には、運用を行い運用負荷に応じて対策を決定する
+    * ここでの対策はPJNaviへのプロジェクト情報逆連携ツールなど
+
+
+プロジェクトメンバ送信参考SQL
+-----------------------------
+
+```
+/*===========================================================================================*/
+/* 瑕疵プロジェクトの元メンバマージSQL                                                       */
+/* (一般プロジェクトで使用しても弊害なし)                                                    */
+/*===========================================================================================*/
+/* 瑕疵プロジェクトメンバ                                        */
+/*(瑕疵元プロジェクトからコピーされたメンバはメンバ期間をマージ) */
+select '1' DIS_CD,
+       PRJ_RESRC.PRJ_CD,
+       EMP.EMP_ID,
+       PRJ_RESRC.PRJ_RESRC_ROLE,
+       case 
+         when PRJ.FLAW_PRJ_FLG = '1' and                      /* 瑕疵プロジェクト、かつ                                 */
+              PRJ_RESRC.PRJ_RESRC_STR_DT = PRJ.PRJ_STR_DT and /* メンバ期間開始日が(瑕疵)プロジェクト開始日、かつ       */
+              SRC_PRJ_RESRC.PRJ_RESRC_STR_DT is not null      /* マージ対象メンバ設定が存在している                     */
+         then SRC_PRJ_RESRC.PRJ_RESRC_STR_DT                  /* 場合は、メンバ開始期間をマージ対象メンバの開始日とする */
+         else PRJ_RESRC.PRJ_RESRC_STR_DT                      /* それ以外の場合は、レコードの開始日を使用               */
+       end,
+       PRJ_RESRC.PRJ_RESRC_END_DT
+from   PJTR_PJ_PRJ_RESRC PRJ_RESRC
+       inner join PJTR_PJ_PRJ PRJ
+         on  PRJ.PRJ_CD = PRJ_RESRC.PRJ_CD
+       left join PJTM_PJ_EMP EMP
+         on  EMP.EMP_CD = PRJ_RESRC.PRJ_RESRC_EMP_CD
+         and '2012/08/08' between EMP.VLD_STR_DT and EMP.VLD_END_DT
+       left join PJTR_PJ_PRJ SRC_PRJ
+         on  SRC_PRJ.FLAW_PRJ_CD = PRJ.PRJ_CD
+       left join PJTR_PJ_PRJ_RESRC SRC_PRJ_RESRC
+         on  SRC_PRJ_RESRC.PRJ_CD = SRC_PRJ.PRJ_CD
+         and SRC_PRJ_RESRC.PRJ_RESRC_EMP_CD = PRJ_RESRC.PRJ_RESRC_EMP_CD
+         and SRC_PRJ_RESRC.PRJ_RESRC_STR_DT <= PRJ.PRJ_STR_DT
+         and SRC_PRJ_RESRC.PRJ_RESRC_END_DT >= PRJ.PRJ_STR_DT
+where  PRJ_RESRC.PRJ_RESRC_TBA_FLG = '0'
+  and  PRJ_RESRC.DEL_FLG = '0'
+  and  PRJ_RESRC.PRJ_CD = 'PJ99041002'
+union all
+/* 瑕疵プロジェクト期間以前のみに存在する瑕疵元プロジェクトメンバ */
+select '1' DIS_CD,
+       FLAW_PRJ.PRJ_CD,
+       EMP.EMP_ID,
+       PRJ_RESRC.PRJ_RESRC_ROLE,
+       PRJ_RESRC.PRJ_RESRC_STR_DT,
+       PRJ_RESRC.PRJ_RESRC_END_DT
+from   PJTR_PJ_PRJ FLAW_PRJ
+       inner join PJTR_PJ_PRJ PRJ
+         on  PRJ.FLAW_PRJ_CD = FLAW_PRJ.PRJ_CD
+       inner join PJTR_PJ_PRJ_RESRC PRJ_RESRC
+         on  PRJ_RESRC.PRJ_CD = PRJ.PRJ_CD
+         and PRJ_RESRC.PRJ_RESRC_END_DT < FLAW_PRJ.PRJ_STR_DT
+         and PRJ_RESRC.PRJ_RESRC_TBA_FLG = '0'
+         and PRJ_RESRC.DEL_FLG = '0'
+       left join PJTM_PJ_EMP EMP
+         on  EMP.EMP_CD = PRJ_RESRC.PRJ_RESRC_EMP_CD
+         and '2012/08/08' between EMP.VLD_STR_DT and EMP.VLD_END_DT
+where  FLAW_PRJ.PRJ_CD = 'PJ99041002'
+```
