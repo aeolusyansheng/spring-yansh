@@ -1,1 +1,0 @@
-http://10.230.17.139:7003/TaskEsbWsdlProject/ProxyService
