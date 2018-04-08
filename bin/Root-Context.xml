@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:context="http://www.springframework.org/schema/context" xmlns:lang="http://www.springframework.org/schema/lang" xmlns:task="http://www.springframework.org/schema/task"
-	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jee="http://www.springframework.org/schema/jee" xmlns:util="http://www.springframework.org/schema/util"
-	xmlns:jaxws="http://cxf.apache.org/jaxws"
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:lang="http://www.springframework.org/schema/lang" xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:jaxws="http://cxf.apache.org/jaxws"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
@@ -19,7 +21,8 @@
 		<property name="sex" value="male" />
 	</bean>
 
-	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<property name="basenames">
 			<list>
 				<value>classpath:/message/message</value>
@@ -27,23 +30,24 @@
 		</property>
 		<property name="defaultEncoding" value="UTF-8" />
 	</bean>
-
 	<bean id="myAdvisor" class="helloworld.aop.MyAdvisor" />
 	<bean id="myAdvisor1" class="helloworld.aop.MyAdvisorInterface" />
 	<bean id="myAdvisor2" class="helloworld.aop.MyAdvisorAnotation" />
-	<aop:aspectj-autoproxy/>
+	<!--<aop:aspectj-autoproxy /> -->
 
-	<!-- <aop:config>-->
-		<!--<aop:pointcut expression="execution(* helloworld.MyBean.toString2(..))" id="testPointcut" />-->
-		<!--  <aop:aspect ref="myAdvisor">-->
-			<!-- <aop:after method="setAfter" pointcut-ref="testPointcut" /> -->
-			<!-- <aop:before method="setBefore" pointcut-ref="testPointcut" /> -->
-			<!-- <aop:after-returning method="setAfterReturn" pointcut-ref="testPointcut" /> -->
-			<!-- <aop:after-throwing method="setAfterException" pointcut-ref="testPointcut"/> -->
-			<!-- <aop:around method="setAround" pointcut-ref="testPointcut"/> -->
-			<!--  <aop:around method="setBeforeWithpara" pointcut-ref="testPointcut" /> -->
-		<!--  </aop:aspect>
-		<aop:advisor advice-ref="myAdvisor1" pointcut-ref="testPointcut"/>
-	</aop:config>-->
+	<!-- <aop:config> -->
+	<!--<aop:pointcut expression="execution(* helloworld.MyBean.toString2(..))" 
+		id="testPointcut" /> -->
+	<!-- <aop:aspect ref="myAdvisor"> -->
+	<!-- <aop:after method="setAfter" pointcut-ref="testPointcut" /> -->
+	<!-- <aop:before method="setBefore" pointcut-ref="testPointcut" /> -->
+	<!-- <aop:after-returning method="setAfterReturn" pointcut-ref="testPointcut" 
+		/> -->
+	<!-- <aop:after-throwing method="setAfterException" pointcut-ref="testPointcut"/> -->
+	<!-- <aop:around method="setAround" pointcut-ref="testPointcut"/> -->
+	<!-- <aop:around method="setBeforeWithpara" pointcut-ref="testPointcut" 
+		/> -->
+	<!-- </aop:aspect> <aop:advisor advice-ref="myAdvisor1" pointcut-ref="testPointcut"/> 
+		</aop:config> -->
 
 </beans>
