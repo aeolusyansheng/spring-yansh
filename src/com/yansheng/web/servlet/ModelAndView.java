@@ -4,7 +4,6 @@ import java.util.Map;
 
 import org.springframework.ui.ModelMap;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.servlet.View;
 
 public class ModelAndView {
 
