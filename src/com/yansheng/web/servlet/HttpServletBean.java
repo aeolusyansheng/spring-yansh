@@ -30,6 +30,7 @@ import com.yansheng.beans.PropertyAccessorFactory;
 import com.yansheng.beans.PropertyValue;
 import com.yansheng.beans.PropertyValues;
 
+@SuppressWarnings("serial")
 public abstract class HttpServletBean extends HttpServlet implements EnvironmentCapable, EnvironmentAware {
 
     protected final Log logger = LogFactory.getLog(getClass());
