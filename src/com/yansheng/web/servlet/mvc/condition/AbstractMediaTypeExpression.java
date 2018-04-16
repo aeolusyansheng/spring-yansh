@@ -81,4 +81,5 @@ public abstract class AbstractMediaTypeExpression
 		builder.append(mediaType.toString());
 		return builder.toString();
 	}
+
 }
