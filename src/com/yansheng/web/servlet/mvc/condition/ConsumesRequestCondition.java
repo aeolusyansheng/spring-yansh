@@ -16,7 +16,7 @@ import org.springframework.web.HttpMediaTypeNotSupportedException;
 
 import com.yansheng.web.servlet.mvc.condition.HeadersRequestCondition.HeaderExpression;
 
-public class ConsumesRequestCondition extends AbstractRequestCondition<ConsumesRequestCondition> {
+public final class ConsumesRequestCondition extends AbstractRequestCondition<ConsumesRequestCondition> {
 
 	private final List<ComsumeMediaTypeExpression> expressions;
 

@@ -17,7 +17,7 @@ import org.springframework.util.PathMatcher;
 import org.springframework.util.StringUtils;
 import org.springframework.web.util.UrlPathHelper;
 
-public class PatternsRequestCondition extends AbstractRequestCondition<PatternsRequestCondition> {
+public final class PatternsRequestCondition extends AbstractRequestCondition<PatternsRequestCondition> {
 
     private final Set<String> patterns;
     private final UrlPathHelper pathHelper;
@@ -25,6 +25,11 @@ public class PatternsRequestCondition extends AbstractRequestCondition<PatternsR
     private final boolean useSuffixPatternMatch;
     private final boolean useTrailingSlashMatch;
     private final List<String> fileExtensions = new ArrayList<String>();
+
+    public PatternsRequestCondition(String... patterns) {
+        this(asList(patterns), null, null, true, true,
+                null);
+    }
 
     public PatternsRequestCondition(String[] patterns, UrlPathHelper urlPathHelper,
             PathMatcher pathMatcher, boolean useSuffixPatternMatch, boolean useTrailingSlashMatch) {
